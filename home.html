@@ -983,15 +983,7 @@
 								size="calc(130px * var(--portal-scale))"
 								top="calc(50% + (30px * var(--portal-scale)))"
 							></home-portal>
-							<home-portal
-								id="guestbook"
-								img="/img/circle-9.gif"
-								link="/guestbook.html"
-								name="guestbook"
-								right="calc(50% - (360px * var(--portal-scale)))"
-								size="calc(130px * var(--portal-scale))"
-								top="calc(50% - (50px * var(--portal-scale)))"
-							></home-portal>
+							
 							<home-portal
 								id="characters"
 								img="/img/circle-6.gif"
@@ -1089,7 +1081,7 @@
 							<div class="window-content">
 								<artifacts-display></artifacts-display>
 							</div>
-							<a href="artifacts.html">
+							<a href="">
 								<div class="view-all">
 									<p>VIEW ALL</p>
 								</div>
@@ -1107,30 +1099,28 @@
 					</div>
 					<div class="windows-content" id="windows-left-content">
 						<!-- LOG -->
-						<div class="base-window" id="log-window">
-							<div class="window-title">
-								<h1>LATEST LOG ENTRY</h1>
-							</div>
-							<div class="window-content">
-								<div id="latest-log-entry"></div>
-								
-							</div>
-							<a href="log.html">
-								<div class="view-all">
-									<p>VIEW ALL</p>
-								</div>
-							</a>
-						</div>
+						
 						<!-- PATCHES -->
 						<div class="base-window" id="patches-window">
 							<div class="window-title">
 								<h1>PATCH NOTES</h1>
-							</div>
-							<div class="window-content">
 								
-								<table id="patch-list"></table>
 							</div>
-							<a href="patches.html">
+							<div class="window-content" style="text-align: left ;">
+
+								<table id="patch-list">
+									<p>04/28/2024	Publish site!</p>
+									<p>04/29/2024	Add secret!</p>
+									<p>04/29/2024	Add mobile support.</p>
+									<p>04/30/2024	Optimize images.</p>
+									<p>04/30/2024	Other mobile improvements.</p>
+									<p>04/30/2024	Fix modal for mobile.</p>
+									<p>04/30/2024	Fix color and positioning issues for mobile.</p>
+									<p>05/01/2024	Publish site to custom domain.</p>
+									<p>05/06/2024	Reduce background animation speed.</p>
+								</table>
+							</div>
+							<a href="">
 								<div class="view-all">
 									<p>VIEW ALL</p>
 								</div>
