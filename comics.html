@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="manifest.json" rel="manifest" />
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>comics</title>
+		<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+		<script
+			defer=""
+			src="component/comic-portal.js"
+			type="text/javascript"
+		></script>
+		<style>
+			.comic-cover {
+				object-fit: cover;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				border-style: outset;
+				border-color: rgba(26, 26, 95, 0.411);
+				border-width: 0px 5px 0px 0px;
+			}
+			.comic-cover:hover {
+				filter: brightness(1.5) hue-rotate(20deg);
+				opacity: 0.8;
+				transition: 0.1s ease;
+			}
+
+			a.comic-title {
+				color: rgb(176, 223, 165);
+			}
+
+			a.comic-title:hover {
+				font-style: italic;
+				color: rgb(209, 124, 128);
+			}
+
+			.comic-border-container {
+				border-style: double;
+				border-color: rgb(47, 88, 0);
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+
+			.comic-container {
+				display: flex;
+				height: 200px;
+				background-image: url("img/texture-1.png");
+				background-color: rgb(87, 104, 27);
+				background-blend-mode: multiply;
+			}
+
+			.comic-info {
+				width: 80%;
+				height: 90%;
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body class="machine">
+		<a class="back-button" href="home.html">back</a>
+		<br />
+		<br />
+		<div
+			id="comics-list"
+			style="
+				max-width: 1000px;
+				margin: auto;
+				display: flex;
+				flex-direction: column;
+			"
+		></div>
+		<br />
+		<script>
+			class comic {
+				constructor(img, link, title, description, color) {
+					this.img = img;
+					this.link = link;
+					this.title = title;
+					this.description = description;
+					this.color = color;
+				}
+			}
+			var comics = [];
+			comics[0] = new comic(
+				"/comic/thief/cover.png",
+				"/comic/thief.html",
+				"Thief",
+				"Adventures of a bored and hungry thief!",
+				"rgb(58, 77, 27)"
+			);
+			comics[1] = new comic(
+				"/comic/rainy-day/cover.png",
+				"/comic/rainy-day.html",
+				"Rainy Day",
+				"A guy wakes up to a rainy day and decides to do something about it.",
+				"rgb(90, 76, 129)"
+			);
+			comics[2] = new comic(
+				"/comic/mask-festival/cover.png",
+				"/comic/mask-festival.html",
+				"Mask Festival",
+				"Two friends decide to go to a mask festival.",
+				"rgb(102, 48, 27)"
+			);
+			comics[3] = new comic(
+				"/comic/how-to-breathe/cover.png",
+				"/comic/how-to-breathe.html",
+				"How to Breathe",
+				"A discussion about the most simple ​pleasure of life.",
+				"rgb(112, 58, 79)"
+			);
+			comics[4] = new comic(
+				"/comic/childhood-friends/cover.png",
+				"/comic/childhood-friends.html",
+				"Childhood Friends",
+				"Small thoughts about an old friend.",
+				"rgb(116, 57, 131)"
+			);
+			comics[5] = new comic(
+				"/comic/fabric-tongue/cover.png",
+				"/comic/fabric-tongue.html",
+				"Fabric Tongue",
+				"A couple of pals decide to grab dessert.",
+				"rgb(50, 104, 99)"
+			);
+			comics[6] = new comic(
+				"/comic/how-to-cry/cover.png",
+				"/comic/how-to-cry.html",
+				"How to Cry",
+				"Wanting to cry is simple. Actually doing it is another story.",
+				"rgb(100, 89, 24)"
+			);
+
+			if (Math.floor(Math.random() * 101) > 90) {
+				comics[comics.length] = new comic(
+					"/comic/walk/cover.png",
+					"/comic/walk.html",
+					"???",
+					"???",
+					"rgb(87, 104, 27)"
+				);
+			}
+
+			for (let i = comics.length - 1; i > -1; i--) {
+				let comic = comics[i];
+				let title = comic.title;
+				let description = comic.description;
+				let img = comic.img;
+				let link = comic.link;
+				let color = comic.color ?? "rgb(90, 76, 129)";
+
+				let html = `
+        <comic-portal img=${img} title='${title}' description='${description}' color='${color}' link='${link}'></comic-portal>`;
+				var comicsList = document.getElementById("comics-list");
+				var comicEntry = document.createElement("div");
+				comicEntry.innerHTML = html;
+				comicsList.appendChild(comicEntry);
+			}
+		</script>
+	</body>
+</html>

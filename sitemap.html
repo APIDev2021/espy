@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="manifest.json" rel="manifest" />
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>sitemap</title>
+		<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+		<style>
+			.container {
+				position: relative;
+				max-width: 700px;
+				margin: auto;
+				padding: 20px;
+				margin-top: 20px;
+				background-color: rgba(0, 0, 0, 0.781);
+				z-index: 10;
+				border-style: double;
+				border-color: var(--dark-green);
+			}
+
+			hr {
+				color: green;
+				border-color: green;
+			}
+
+			p {
+				width: fit-content;
+				color: var(--lime-green);
+				font-family: "Consolas";
+				font-size: 1em;
+				text-align: left;
+				line-height: 1.6em;
+			}
+
+			.container a,
+			.container a:link {
+				color: yellow;
+				text-decoration: underline;
+			}
+			.container a:hover {
+				color: white;
+			}
+
+			.title {
+				margin-top: 0;
+				width: fit-content;
+				font-family: "Silkscreen";
+				text-align: left;
+				color: yellow;
+				z-index: 12;
+				width: 90%;
+				font-size: 1.7em;
+			}
+
+			.nav-link {
+				color: rgb(255, 119, 210) !important;
+				font-weight: bold;
+				font-family: "Silkscreen";
+			}
+
+			.nav-link:hover,
+			.you-are-here {
+				background-color: rgb(255, 119, 210);
+				color: black !important;
+			}
+
+			.closed,
+			.coming-soon,
+			.closed:hover,
+			.coming-soon:hover {
+				color: gray !important;
+				background-color: transparent !important;
+			}
+
+			@media screen and (max-width: 600px) {
+				body {
+					background: url("img/machine-dark.png");
+					background-size: 300px;
+					margin: 0px;
+				}
+				.container {
+					padding: 15px;
+				}
+			}
+		</style>
+	</head>
+	<body class="rainbow-machine">
+		<a class="back-button" href="home.html">back</a>
+		<br />
+		<div class="container">
+			<h2 class="title">SITEMAP</h2>
+			<hr />
+			<p>
+				<a class="nav-link" href="gallery.html">GALLERY</a> - where I host my
+				art
+			</p>
+			<p>
+				<a class="nav-link" href="comics.html">COMICS</a> - where I host my
+				comics
+			</p>
+			<p>
+				<a class="nav-link" href="lab.html">LAB</a> - where I host various
+				random projects I’ve done, mainly related to code
+			</p>
+			<p>
+				<a class="nav-link" href="espeon.html">COLLECTION</a> - where I host a
+				viewable record of my physical
+				<a href="https://bulbapedia.bulbagarden.net/wiki/Espeon_(Pok%C3%A9mon)"
+					>Espeon</a
+				>
+				collection
+			</p>
+			<p>
+				<a class="nav-link" href="characters.html">CHARACTERS</a> - information
+				on my characters
+			</p>
+			<p>
+				<a class="nav-link" href="guestbook.html">GUESTBOOK</a> - a place where
+				you can leave a message!
+			</p>
+			<p>
+				<a class="nav-link coming-soon" href="javascript: void(0);"
+					>SOUVENIRS [COMING SOON]</a
+				>
+				- a place for me to put graphics I will make (in the future) for you to
+				take home
+			</p>
+			<hr />
+			<p>
+				<a class="nav-link" href="log.html">LOG</a> - my blog. features my
+				various musings and also site updates. Includes a
+				<a href="feed.xml">feed</a>.
+			</p>
+			<p>
+				<a class="nav-link" href="patches.html">PATCH NOTES</a> - patch notes
+				for the site
+			</p>
+			<p>
+				<a class="nav-link" href="roadmap.html">ROADMAP</a> - planned updates
+				for the site. also lists notable known bugs/issues.
+			</p>
+			<p>
+				<a class="nav-link" href="artifacts.html">ARTIFACTS</a> - graphics I’ve
+				collected from other parts of the web
+			</p>
+			<hr />
+			<p>
+				<a class="nav-link" href="about.html">ABOUT</a> - about me, the
+				webmaster
+			</p>
+			<p>
+				<a class="nav-link" href="info.html">INFO</a> - a page with information
+				about the site, plus credits
+			</p>
+			<p>
+				<a class="nav-link you-are-here" href="javascript: void(0)"
+					>SITEMAP (YOU ARE HERE)</a
+				>
+				- a navigation page with links to the main pages of the site
+			</p>
+			<p>
+				<a class="nav-link" href="station.html">STATION</a> - other sites to
+				visit. includes a button that lets you link back to my site if you so
+				desire.
+			</p>
+			<hr />
+			<p>
+				<a class="nav-link closed" href="javascript: void(0)">???</a> - a black
+				hole.
+			</p>
+		</div>
+	</body>
+</html>

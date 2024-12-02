@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+		<meta charset="utf-8" />
+		<link href="manifest.json" rel="manifest" />
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+		<title>characters</title>
+		<style>
+			:root {
+				--cell-border-radius: 10px;
+			}
+
+			/** ANIMATIONS */
+			@keyframes animated-default-bg {
+				from {
+					background-position: 0 0;
+				}
+				to {
+					background-position: 300px 300px;
+				}
+			}
+			@keyframes animated-worldcocoon-bg {
+				from {
+					background-position: 0 0;
+				}
+				to {
+					background-position: 300px 300px;
+				}
+			}
+			@keyframes animated-halfside-bg {
+				from {
+					background-position: 0 0;
+				}
+				to {
+					background-position: 300px 0px;
+				}
+			}
+			@keyframes animated-routemaster-bg {
+				from {
+					background-position: 0 0;
+				}
+				to {
+					background-position: 0px 300px;
+				}
+			}
+			@keyframes animated-facilityentra-bg {
+				from {
+					background-position: 0 0;
+				}
+				to {
+					background-position: 300px 300px;
+				}
+			}
+
+			@keyframes animated-grid-primary {
+				from {
+					background-position: 0 0;
+				}
+				to {
+					background-position: 250px 250px;
+				}
+			}
+			@keyframes animated-grid-secondary {
+				from {
+					background-position: 0px 0px;
+				}
+				to {
+					background-position: 300px 0px;
+				}
+			}
+
+			/* CONTAINER STYLING */
+			body {
+				margin: 0;
+			}
+			.grid-background {
+				position: fixed;
+				left: 0%;
+				top: 0%;
+				width: 100%;
+				height: 100dvh;
+				background-size: 400px;
+				background-image: url("img/grid-icons.png");
+			}
+			#grid-primary {
+				animation: animated-grid-primary 40s linear infinite;
+				background-size: 250px;
+			}
+			#grid-secondary {
+				animation: animated-grid-secondary 40s linear infinite;
+				background-size: 300px;
+				display: none;
+			}
+			#container {
+				margin: auto;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1em;
+				justify-content: center;
+			}
+			.title {
+				margin-top: 0;
+				text-align: left;
+				color: var(--lime-green);
+				font-family: "Silkscreen";
+			}
+
+			/* WORLDS */
+			.world-container {
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+
+				width: calc(50% - 20px);
+				max-width: 700px;
+
+				background: black;
+				background-image: url("img/coral.png");
+				background-size: 300px;
+				border-style: double;
+				border-color: green;
+				border-width: 3px;
+				box-sizing: border-box;
+				animation-name: animated-default-bg;
+				animation-timing-function: linear;
+				animation-duration: 60s;
+				animation-iteration-count: infinite;
+			}
+			.world-header {
+				position: relative;
+				padding: 10px;
+				border-bottom-style: solid;
+				border-width: 1px;
+				border-color: green;
+			}
+			.world-footer {
+				border-top-style: solid;
+				border-width: 1px;
+				border-color: green;
+				background-color: black;
+			}
+			.world-description {
+				color: var(--lime-green);
+				margin: 20px;
+			}
+			.world-header-bg {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0%;
+				left: 0%;
+				background: url("img/brains-texture.png");
+				z-index: 0;
+				mix-blend-mode: luminosity;
+			}
+			.world-title {
+				position: relative;
+				font-family: "Silkscreen";
+				color: var(--lime-green);
+				font-size: 2em;
+				margin: 0 auto;
+				width: fit-content;
+				z-index: 10;
+			}
+			.world-characters {
+				position: relative;
+				flex-grow: 1;
+				justify-content: center;
+				align-content: center;
+				display: flex;
+				flex-direction: column;
+				gap: 1em;
+				padding: 20px;
+			}
+			.world-vignette {
+				top: 0%;
+				left: 0%;
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				box-shadow: inset 0px 0px 50px rgb(231, 31, 205);
+				mix-blend-mode: multiply;
+				z-index: 0;
+			}
+
+			/* CHARACTERS GRID */
+			.characters-grid {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 1em;
+				z-index: 1;
+			}
+
+			/* CHARACTER CELL */
+			.character-cell-wrapper {
+				box-sizing: border-box;
+				background-color: rgb(22, 85, 22);
+				border-radius: var(--cell-border-radius);
+			}
+			.character-cell {
+				display: flex;
+				flex-direction: column;
+				box-sizing: border-box;
+				width: fit-content;
+				height: fit-content;
+
+				border-style: solid;
+				border-width: 1px;
+				border-color: greenyellow;
+				border-radius: var(--cell-border-radius);
+
+				transition: 0.2s !important;
+				position: relative;
+				image-rendering: auto;
+			}
+			.character-icon {
+				width: calc(700px / 5);
+				height: calc(1000px / 5);
+				object-position: 0px -10px;
+				object-fit: cover;
+				border-radius: var(--cell-border-radius);
+			}
+			.character-label {
+				position: absolute;
+				bottom: 0%;
+				width: 100%;
+				font-family: "Consolas";
+				font-size: 0.8em;
+				text-transform: uppercase;
+				background-color: rgb(0, 0, 0);
+				color: greenyellow;
+				margin: 0;
+				padding: 5px 0px;
+				transition: 0.2s !important;
+				border-top-style: solid;
+				border-width: 1px;
+				border-color: var(--lime-green);
+				border-bottom-left-radius: var(--cell-border-radius);
+				border-bottom-right-radius: var(--cell-border-radius);
+			}
+			.character-cell-wrapper:hover .character-cell {
+				transform: translateY(-5px) rotateZ(2deg);
+				transition: none !important;
+			}
+			.character-cell-wrapper:hover .character-label {
+				background-color: greenyellow;
+				color: black;
+				transition: none !important;
+			}
+			.character-cell-wrapper:hover .character-icon {
+				filter: hue-rotate(180deg);
+			}
+
+			/* LAYERS */
+			.characters-secondary .character-icon {
+				width: calc(700px / 6);
+				height: calc(1000px / 6);
+			}
+			.characters-tertiary .character-icon {
+				width: calc(700px / 7);
+				height: calc(1000px / 7);
+			}
+
+			/* WORLD COCOON */
+			#worldcocoon {
+				background-image: url("img/texture-13.png");
+				border-color: rgb(0, 255, 136);
+				background-size: 300px;
+				animation-name: animated-worldcocoon-bg;
+			}
+			#worldcocoon .world-title {
+				background: linear-gradient(
+					to left,
+					rgb(50, 255, 187),
+					rgb(89, 255, 89),
+					yellow
+				);
+				background-clip: text;
+				color: transparent;
+			}
+			#worldcocoon .world-header-bg {
+				mix-blend-mode: difference;
+			}
+			#worldcocoon .character-cell,
+			#worldcocoon .character-label {
+				border-color: rgb(0, 255, 136);
+			}
+			#worldcocoon .character-label {
+				color: rgb(0, 255, 136);
+			}
+			#worldcocoon .character-cell-wrapper:hover .character-label {
+				background-color: rgb(0, 255, 136);
+				color: black;
+			}
+			#worldcocoon .character-cell-wrapper {
+				background-color: green;
+			}
+			#worldcocoon .world-vignette {
+				mix-blend-mode: color-dodge;
+			}
+
+			/* HALFISIDE */
+			#halfside {
+				background-image: url("img/agave.png");
+				border-color: rgb(170, 199, 5);
+				border-style: outset;
+				image-rendering: pixelated;
+				background-size: 300px;
+				animation-name: animated-halfside-bg;
+			}
+			#halfside .world-title {
+				color: rgb(230, 215, 8);
+				text-shadow: 1px 1px 10px rgb(0, 0, 0);
+				font-family: "Courier New";
+				text-transform: uppercase;
+			}
+			#halfside .world-header-bg {
+				background: url("img/sunflowers.png");
+				background-size: contain;
+				opacity: 1;
+				mix-blend-mode: multiply;
+			}
+			#halfside .character-cell,
+			#halfside .character-label {
+				border-color: yellow;
+			}
+			#halfside .character-label {
+				font-family: "Georgia";
+				font-size: 0.7em;
+				color: yellow;
+			}
+			#halfside .character-cell-wrapper:hover .character-label {
+				background-color: yellow;
+				color: black;
+			}
+			#halfside .character-cell-wrapper {
+				background-color: rgb(221, 127, 143);
+			}
+			#halfside .world-vignette {
+				box-shadow: inset 0px 0px 50px rgb(92, 92, 78);
+				mix-blend-mode: multiply;
+			}
+			#halfside .world-footer {
+				border-color: rgba(255, 255, 0, 0.479);
+			}
+			#halfside .world-description {
+				color: yellow;
+				font-family: "Georgia";
+				letter-spacing: 1px;
+			}
+
+			/* ROUTEMASTER */
+			#routemaster {
+				background-image: url("img/prayerwheel.png");
+				image-rendering: pixelated;
+				border-color: gold;
+				border-style: groove;
+				background-size: 300px;
+				animation-name: animated-routemaster-bg;
+			}
+			#routemaster .world-header {
+				border-color: rgba(255, 145, 0, 0.678);
+			}
+			#routemaster .world-title {
+				color: gold;
+				text-shadow: 1px 1px 1px orange;
+				font-family: "Cinzel";
+			}
+			#routemaster .world-header-bg {
+				background: url("img/red-fabric.png");
+				image-rendering: auto;
+				background-size: contain;
+				mix-blend-mode: luminosity;
+			}
+			#routemaster .character-cell,
+			#routemaster .character-label {
+				border-color: gold;
+			}
+			#routemaster .character-label {
+				font-family: "Georgia";
+				font-size: 0.7em;
+				color: gold;
+			}
+			#routemaster .character-cell-wrapper:hover .character-label {
+				background-color: gold;
+				color: black;
+			}
+			#routemaster .character-cell-wrapper {
+				background-color: rgb(255, 0, 0);
+			}
+			#routemaster .world-footer {
+				border-color: rgba(255, 145, 0, 0.678);
+			}
+			#routemaster .world-description {
+				color: gold;
+				font-family: "Georgia";
+				letter-spacing: 1px;
+			}
+
+			/* FACILITY ENTRA */
+			#facilityentra {
+				background-image: url("img/facilityentra-placeholder.png");
+				border-color: rgb(0, 255, 255);
+				image-rendering: pixelated;
+				background-size: 300px;
+				animation-name: animated-facilityentra-bg;
+			}
+			#facilityentra .character-cell-wrapper {
+				background-color: orange;
+			}
+			#facilityentra .world-vignette {
+				box-shadow: inset 0px 0px 50px rgb(20, 24, 78);
+				mix-blend-mode: difference;
+			}
+			#facilityentra .world-header {
+				padding: 10px 20px;
+				border-color: rgba(90, 95, 95, 0.411);
+			}
+			#facilityentra .world-header-bg {
+				background: rgb(23, 151, 255);
+				background-size: 100px;
+				mix-blend-mode: multiply;
+			}
+			#facilityentra .world-title {
+				background: linear-gradient(
+					to left,
+					rgb(155, 255, 24),
+					rgb(0, 255, 234)
+				);
+				background-clip: text;
+				color: transparent;
+				font-family: "Rock Salt";
+				font-size: 1.5em;
+			}
+			#facilityentra .character-cell,
+			#facilityentra .character-label {
+				border-color: rgb(0, 255, 255);
+			}
+			#facilityentra .character-label {
+				color: rgb(0, 255, 255);
+			}
+			#facilityentra .character-cell-wrapper:hover .character-label {
+				background-color: rgb(0, 255, 255);
+				color: black;
+			}
+			#facilityentra .world-footer {
+				border-color: rgba(0, 255, 255, 0.575);
+			}
+			#facilityentra .world-description {
+				font-family: "Rock Salt";
+				letter-spacing: 1px;
+				margin: 10px;
+				background: linear-gradient(
+					to left,
+					rgb(155, 255, 24),
+					rgb(0, 255, 234)
+				);
+				background-clip: text;
+				color: transparent;
+			}
+
+			/* SMALL SCREEN STYLING */
+			@media screen and (max-width: 1000px) {
+				body {
+					margin: 0;
+				}
+				#container {
+					flex-direction: column;
+					margin: 0 20px;
+					align-items: center;
+				}
+				.world-container {
+					width: 100%;
+				}
+			}
+			@media screen and (max-width: 600px) {
+				#container {
+					margin: 0px;
+				}
+				.world-container {
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<a class="back-button" href="home.html">back</a>
+		<div class="grid-background" id="grid-primary"></div>
+		<div class="grid-background" id="grid-secondary"></div>
+		<br />
+		<br />
+		<div id="container">
+			<div id="worldcocoon"></div>
+			<div id="halfside"></div>
+			<div id="routemaster"></div>
+			<div id="facilityentra"></div>
+			<div id="sonas"></div>
+			<div id="misc"></div>
+		</div>
+
+		<br />
+
+		<script>
+			const DEFAULT_LAYER = "primary";
+			var miscId = "misc";
+			var container = document.getElementById("container");
+
+			const getMindspaceData = async () => {
+				const res = await fetch("/json/mindspace.json");
+				const data = await res.json();
+				return data;
+			};
+
+			let mindspacePromise = getMindspaceData();
+			mindspacePromise.then((mindspace) => {
+				var characters = mindspace["characters"];
+				var worlds = mindspace["worlds"];
+
+				// worlds
+				for (const [id, data] of Object.entries(worlds)) {
+					addCategory(id, data.name, data.desc);
+				}
+
+				// characters
+				for (const [id, data] of Object.entries(characters)) {
+					let layer = DEFAULT_LAYER;
+					let world = "misc";
+					if (data.world) world = data.world;
+					if (data.layer) layer = data.layer;
+
+					let charactersGrid = document.getElementById(getGridId(world, layer));
+					charactersGrid.style = "";
+
+					let linkElement = document.createElement("a");
+					linkElement.href = data.link;
+
+					if (!data.link) {
+						linkElement.href = "javascript: void(0)";
+					}
+
+					let characterCellWrapperElement = document.createElement("div");
+					characterCellWrapperElement.className = "character-cell-wrapper";
+
+					let characterCellElement = document.createElement("div");
+					characterCellElement.className = "character-cell";
+					characterCellWrapperElement.appendChild(characterCellElement);
+
+					let characterIconElement = document.createElement("img");
+					characterIconElement.className = "character-icon";
+					characterIconElement.src = data.icon ?? "/img/undefined-image.png";
+
+					let characterLabelElement = document.createElement("p");
+					characterLabelElement.className = "character-label";
+					characterLabelElement.textContent = data.name;
+
+					characterCellElement.appendChild(characterIconElement);
+					characterCellElement.appendChild(characterLabelElement);
+
+					linkElement.appendChild(characterCellWrapperElement);
+					charactersGrid.appendChild(linkElement);
+				}
+			});
+
+			function addCategory(id, name, desc) {
+				// World elements
+				let worldElement = document.getElementById(id);
+				worldElement.className = "world-container";
+
+				let worldHeaderElement = document.createElement("div");
+				worldHeaderElement.className = "world-header";
+
+				let worldHeaderBgElement = document.createElement("div");
+				worldHeaderBgElement.className = "world-header-bg";
+
+				let worldTitleElement = document.createElement("h1");
+				worldTitleElement.className = "world-title";
+				worldTitleElement.textContent = name;
+
+				let worldCharactersElement = document.createElement("div");
+				worldCharactersElement.className = "world-characters";
+
+				let worldDescriptionElement = document.createElement("p");
+				worldDescriptionElement.className = "world-description";
+				worldDescriptionElement.textContent = desc;
+
+				let worldFooterElement = document.createElement("div");
+				worldFooterElement.className = "world-footer";
+
+				let vignette = document.createElement("div");
+				vignette.className = "world-vignette";
+
+				container.appendChild(worldElement);
+				worldHeaderElement.appendChild(worldHeaderBgElement);
+				worldHeaderElement.appendChild(worldTitleElement);
+				worldFooterElement.appendChild(worldDescriptionElement);
+
+				worldCharactersElement.appendChild(createCategoryLayer(id, "primary"));
+				worldCharactersElement.appendChild(
+					createCategoryLayer(id, "secondary")
+				);
+				worldCharactersElement.appendChild(createCategoryLayer(id, "tertiary"));
+
+				worldCharactersElement.appendChild(vignette);
+				worldElement.appendChild(worldHeaderElement);
+				worldElement.appendChild(worldCharactersElement);
+				worldElement.appendChild(worldFooterElement);
+			}
+
+			function createCategoryLayer(worldId, layerType) {
+				let worldCharactersGrid = document.createElement("div");
+				worldCharactersGrid.className = `characters-grid characters-${layerType}`;
+				worldCharactersGrid.style = "display: none";
+				worldCharactersGrid.id = getGridId(worldId, layerType);
+				return worldCharactersGrid;
+			}
+
+			function getGridId(worldId, layerType) {
+				return `${worldId}-characters-${layerType}`;
+			}
+		</script>
+	</body>
+</html>

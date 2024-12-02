@@ -1,0 +1,248 @@
+:root {
+    --nav-width: 40px;
+}
+
+/* MODAL */
+#modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    border-style: none;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+}
+#modal-wrapper {
+    position: fixed;
+    overflow: auto;
+    display: flex;
+    width: 100%;
+    height: 100dvh;
+}
+#modal-container {
+    margin: auto;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100dvh - 40px);
+    gap: 10px;
+    padding: 20px;
+}
+#modal-exit-button {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    border-style: none;
+    border-radius: 0%;
+    background-color: transparent;
+    z-index: 0;
+    padding: 0;
+    cursor: url("../img/cursor.png"), auto !important;
+    height: 100dvh;
+    width: 100%;
+}
+#exit-text {
+    display: none;
+    margin: 0;
+}
+#modal-info {
+    background-color: rgb(0, 0, 0);
+    border-style: double;
+    margin: 0 auto;
+    color: rgb(179, 226, 203);
+    border-color: rgb(96, 99, 98);
+    display: flex;
+    flex-direction: column;
+    padding: 1em 1em;
+    gap: 10px;
+    z-index: 1;
+    box-sizing: border-box;
+}
+#modal-image {
+    z-index: 1;
+    object-fit: contain;
+    image-rendering: auto;
+    height: fit-content;
+    width: fit-content;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+}
+@media screen and (max-width: 600px) {
+    #modal-container {
+        padding: 0;
+        margin: 0;
+        height: calc(100dvh);
+    }
+    #modal-image {
+        margin: 0 auto;
+    }
+    #modal-exit-button {
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        background-color: rgb(142, 175, 141);
+        height: 50px;
+        width: 50px;
+        margin-left: auto;
+        border-style: outset;
+        border-color: rgb(116, 113, 121);
+    }
+    #exit-text {
+        color: rgb(25, 77, 25);
+        display: block;
+        font-family: 'Silkscreen';
+        font-size: 20px;
+    }
+}
+
+#modal-desc {
+    font-size: 0.95em;
+    color: rgb(177, 177, 177);
+    font-family: "Exo 2";
+    padding: 0;
+    margin: 0;
+}
+#modal-title {
+    font-weight: bold;
+    font-family: "Exo 2";
+    margin: 0;
+    padding: 0;
+}
+#modal-tags {
+    display: flex;
+    font-family: monospace;
+    justify-content: center;
+}
+#modal-tags span {
+    font-size: 1.1em;
+    color: gray;
+    padding: 2px 5px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+/* MODAL NAV */
+.modal-nav {
+    color: rgb(142, 175, 141);
+    background-color:rgb(219, 247, 206);
+    border-color: rgb(116, 113, 121);
+    min-width: var(--nav-width);
+    max-width: var(--nav-width);
+    margin: auto;
+    height: 100%;
+    z-index: 1;
+}
+.modal-nav:hover, .modal-nav.arrow-down {
+    color: rgb(52, 53, 52);
+    background-color:rgb(103, 116, 104);
+    transition: 0.1s;
+}
+.modal-nav:disabled {
+    color: rgb(0, 0, 0);
+    background-color:rgb(49, 49, 49);
+    border-color: rgb(32, 32, 32);
+}
+
+/* DYNAMIC GRID */
+.dynamic-grid {
+    justify-content: center;
+}
+.dynamic-grid-cell {
+    position: relative;
+    height: 100%;
+}
+.dynamic-grid-button {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1;
+    top: 0%;
+    left: 0%;
+}
+.dynamic-grid-image {
+    height: 100%;
+}
+@media screen and (max-width: 600px) {
+    .dynamic-grid-row {
+        max-height: none;
+    }
+}
+
+/* STATIC GRID */
+.static-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0em;
+}
+.static-grid-cell {
+    display: inline;
+}
+.static-grid-image {
+    background: transparent;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: auto;
+    vertical-align: middle;
+}
+.static-grid-button {
+    display: inline;
+    position: absolute;
+    background: transparent;
+    box-sizing: content-box;
+    border-style: none;
+    border-width: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* SHARED GRID STYLING */
+.grid-cell {
+    position: relative;
+    /* cursor: url("/img/cursor-point.png"), default; */
+}
+.grid-image {
+    order: 1;
+}
+.grid-button {
+    order: 2;
+}
+.grid-cell-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    mix-blend-mode: multiply;
+    order: 3;
+}
+.grid-cell-effect, .grid-image {
+    transition: 0.5s ease !important;
+}
+.grid-cell:hover .grid-cell-effect {
+    transition: 0s ease !important;
+    box-shadow: inset 10px 10px 40px rgb(46, 46, 46);
+}
+.disabled-grid img {
+    opacity: 1 !important;
+}
+.disabled-grid button {
+    display: none;
+}
+

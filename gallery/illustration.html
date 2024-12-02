@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="../manifest.json" rel="manifest" />
+		<link href="../favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>illustration</title>
+		<link href="../style.css" media="all" rel="stylesheet" type="text/css" />
+		<script src="../component/modal-core.js" type="text/javascript"></script>
+		<link
+			href="../style/modal.css"
+			media="all"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<style>
+			body {
+				overflow-y: scroll;
+				margin: 0;
+			}
+
+			.dynamic-grid-image {
+				height: calc(100% - 5px);
+				width: calc(100% - 5px);
+			}
+
+			.dynamic-grid-row {
+				justify-content: center;
+			}
+
+			/** FEATURED TOGGLE */
+			#featured,
+			#featured-background {
+				position: fixed;
+				bottom: 0%;
+				right: 0%;
+				padding: 15px;
+				margin: 0px;
+				border-top-left-radius: 10px;
+				z-index: 1000;
+				width: 180px;
+				height: 50px;
+				box-sizing: border-box;
+			}
+			#featured {
+				text-align: left;
+				font-family: "Consolas";
+				color: rgb(238, 255, 0);
+				z-index: 1000;
+				border-color: yellow;
+				border-width: 1px;
+				border-style: solid;
+				border-right-style: none;
+				border-bottom-style: none;
+			}
+			#featured-background {
+				background-color: green;
+				mix-blend-mode: multiply;
+				z-index: 900;
+				box-shadow: inset 10px 10px 10px rgb(0, 0, 0);
+			}
+			#featured-label,
+			#featured-toggle {
+				position: relative;
+				z-index: 1001;
+			}
+			#featured-toggle {
+				accent-color: #d9ff00;
+			}
+
+			/** SMALL SCREEN STYLING */
+			@media screen and (max-width: 600px) {
+				#featured,
+				#featured-background {
+					padding: 10px 10px;
+					width: 170px;
+					height: 40px;
+				}
+				.dynamic-grid-image {
+					height: calc(100% - 5px);
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body class="machine">
+		<div id="featured">
+			<div class="featured-input">
+				<input
+					checked="true"
+					id="featured-toggle"
+					name="Featured"
+					type="checkbox"
+				/>
+				<label id="featured-label" for="featured">FEATURED ONLY</label>
+			</div>
+		</div>
+		<div id="featured-background"></div>
+
+		<br />
+		<div class="display-grid" id="grid"></div>
+		<br />
+		<modal-core id="modal-core"></modal-core>
+		<script src="../js/modal.js"></script>
+		<script src="https://espy.world/js/mindspace-util.js"></script>
+		<script>
+			/** CONSTANTS */
+			const SIZE_GOAL = 465;
+			const SMALL_SIZE_GOAL = Infinity;
+
+			var modalHandler;
+			let artPromise = getArtData();
+			artPromise.then((data) => {
+				// Get default sources and featured sources
+				var sources = [];
+				var featuredSources = [];
+
+				const art = data.art.sort((a, b) => {
+					return new Date(b.date) > new Date(a.date);
+				});
+				for (let entry of art) {
+					if (entry.category == "illustration") {
+						sources.push({ img: entry.src });
+					}
+				}
+				for (let entry of art) {
+					if (entry.category == "illustration" && entry.featured) {
+						featuredSources.push({ img: entry.src });
+					}
+				}
+
+				// Initialize featured toggle
+				featuredToggle = document.getElementById("featured-toggle");
+				featuredToggle.onclick = function () {
+					if (featuredToggle.checked == false) {
+						modalHandler.updateSources(sources);
+					} else {
+						modalHandler.updateSources(featuredSources);
+					}
+				};
+
+				// Initialize modal
+				modalHandler = new Modal({
+					modalCore: document.getElementById("modal-core"),
+					gridElement: document.getElementById("grid"),
+					sources: featuredToggle.checked ? featuredSources : sources,
+				});
+
+				modalHandler.initializeWithDynamicGrid(SIZE_GOAL, SMALL_SIZE_GOAL);
+
+				// Featured toggle hide on modal open
+				var featuredBackgroundElement = document.getElementById(
+					"featured-background"
+				);
+				var featuredElement = document.getElementById("featured");
+
+				modalHandler.setOnModalOpenEvent(() => {
+					featuredElement.style.display = "none";
+					featuredBackgroundElement.style.display = "none";
+				});
+				modalHandler.setOnModalCloseEvent(() => {
+					featuredElement.style.display = "block";
+					featuredBackgroundElement.style.display = "block";
+				});
+			});
+		</script>
+	</body>
+</html>

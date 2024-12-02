@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+		<link href="manifest.json" rel="manifest" />
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+
+		<title>home</title>
+		<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+		<script src="component/home-portal.js" type="text/javascript"></script>
+		<link
+			href="style/log-list-entry.css"
+			media="all"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<script src="component/log-list-entry.js" type="text/javascript"></script>
+		<link
+			href="style/artifacts.css"
+			media="all"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<link
+			href="style/honeycomb.css"
+			media="all"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<script
+			src="component/artifacts-display.js"
+			type="text/javascript"
+		></script>
+		<script src="component/roadmap-display.js" type="text/javascript"></script>
+		<style>
+			/** ANIMATIONS */
+			@keyframes dial-spin {
+				0% {
+					transform: translate(-50%, -50%) rotate(0deg);
+				}
+				100% {
+					transform: translate(-50%, -50%) rotate(360deg);
+				}
+			}
+			@keyframes dial-rotate {
+				0% {
+					transform: translate(-50%, -50%) rotate(-2deg);
+				}
+				100% {
+					transform: translate(-50%, -50%) rotate(2deg);
+				}
+			}
+			@keyframes scrolling-text {
+				0% {
+					transform: translateX(0%);
+				}
+				100% {
+					transform: translateX(100%);
+				}
+			}
+			@keyframes specks-primary {
+				0% {
+					background-position: 0px 0px;
+				}
+				100% {
+					background-position: 300px 300px;
+				}
+			}
+			@keyframes specks-secondary {
+				0% {
+					background-position: 0px 0px;
+				}
+				100% {
+					background-position: 500px 1000px;
+				}
+			}
+
+			/** ROOT */
+			:root {
+				--top-height: 40px;
+				--bottom-height: 50px;
+				--green-primary: rgb(154, 255, 72);
+				--crosshair-size: 100px;
+				--crosshair-secondary-size: 150px;
+				--portal-scale: 1;
+			}
+
+			/** ORDER */
+			#windows-left {
+				order: 0;
+			}
+			#navigation-window {
+				order: 1;
+			}
+			#windows-right {
+				order: 2;
+			}
+
+			/** BODY */
+			body {
+				margin: 0;
+				overflow-x: hidden;
+				overflow-y: hidden;
+			}
+			.container {
+				box-sizing: border-box;
+				min-height: 100dvh;
+				width: 100%;
+			}
+			a {
+				color: var(--green-primary);
+			}
+			p {
+				color: var(--green-primary);
+			}
+			a:hover {
+				color: white;
+			}
+			li {
+				margin: 8px 0px;
+			}
+
+			/** WINDOWS */
+			.windows-container {
+				display: grid;
+				grid: 1fr / 1fr 2.2fr 1fr;
+				width: 100%;
+				min-height: 100dvh;
+				box-sizing: border-box;
+			}
+			.base-window {
+				width: 100%;
+				max-width: 100%;
+				overflow: hidden;
+				background-color: rgb(0, 0, 0);
+				border-color: var(--green-primary);
+				border-style: solid;
+				border-width: 1px;
+				color: var(--green-primary);
+				margin: auto;
+				box-sizing: border-box;
+				display: flex;
+				flex-direction: column;
+				font-size: 0.9em;
+			}
+			.base-window h1 {
+				font-family: "Silkscreen";
+				text-align: left;
+				margin: 0;
+				font-size: 1.2em;
+				background-color: var(--green-primary);
+				color: black;
+				padding: 2px 6px;
+			}
+			#windows-bottom {
+				display: none;
+			}
+			.window-content {
+				padding: 0px 10px;
+			}
+			.windows-column {
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				height: 100%;
+				position: relative;
+				justify-content: center;
+				overflow-y: auto;
+				box-sizing: border-box;
+				padding: 0px 10px;
+			}
+			.windows-content {
+				display: flex;
+				flex-direction: column;
+				margin: auto;
+				gap: 1em;
+				width: 100%;
+			}
+			.view-all {
+				border-top-style: solid;
+				border-width: 1px;
+				background-color: black;
+				padding: 2px 0px;
+				box-sizing: border-box;
+				height: fit-content;
+				border-color: var(--green-primary);
+			}
+			.view-all p {
+				margin: 0px 0px;
+			}
+			.view-all a {
+				color: var(--green-primary);
+			}
+			.view-all:hover {
+				border-color: var(--green-primary);
+				background-color: var(--green-primary);
+			}
+			.view-all:hover p {
+				color: black;
+			}
+
+			/** NAVIGATION TOP */
+			#navigation-top {
+				display: flex;
+				justify-content: center;
+				height: var(--top-height);
+				border-style: solid;
+				border-width: 1px;
+				border-color: var(--green-primary);
+				border-bottom-style: none;
+				position: relative;
+				background-color: black;
+				box-sizing: border-box;
+			}
+			#navigation-hat-wrapper {
+				position: absolute;
+				transform: translate(0, 0%);
+				width: 20%;
+				z-index: 900;
+				height: 60px;
+				overflow-y: hidden;
+			}
+			#navigation-hat {
+				background-color: rgb(0, 0, 0);
+				height: 120px;
+				border-style: solid;
+				border-width: 1px;
+				border-color: var(--green-primary);
+				border-radius: 100%;
+				box-sizing: border-box;
+				transform: translateY(-50%);
+				width: 100%;
+			}
+			#navigation-hat p {
+				z-index: 999;
+				width: fit-content;
+				height: 100%;
+				margin: 0 auto;
+				color: var(--green-primary);
+				font-size: 1.3em;
+				font-family: "Silkscreen";
+				transform: translate(0, calc(50% + 0.3em));
+				opacity: 0.5;
+			}
+			#navigation-hat img {
+				width: fit-content;
+				max-width: 100%;
+				height: 40%;
+				transform: translate(0, calc(50% + 2.5em));
+				margin: 0 auto;
+				image-rendering: pixelated;
+			}
+			#hat-face {
+				display: none;
+			}
+			#power-off {
+				margin: auto 0;
+				height: 23px;
+				width: fit-content;
+				margin-left: auto;
+				padding-right: 6px;
+				z-index: 1000;
+			}
+			#power-off-link {
+				height: 23px;
+			}
+			#power-off-link:hover {
+				opacity: 0.5;
+			}
+			#power-off-image {
+				height: 23px;
+				margin: auto;
+			}
+			#navigation-title h1 {
+				font-family: "Silkscreen";
+				margin: 0;
+				padding: 0;
+				font-size: 1.1em;
+				color: var(--green-primary);
+				padding-left: 10px;
+			}
+			#navigation-title {
+				height: fit-content;
+				margin: auto 0;
+			}
+
+			/** NAVIGATION WINDOW */
+			#navigation-window {
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				height: calc(100% - 1px);
+				box-sizing: border-box;
+			}
+			#portals-window {
+				width: 100%;
+				height: 100%;
+				position: relative;
+				background: url(img/machine-dark.png),
+					radial-gradient(circle, rgb(0, 0, 0) 50%, rgb(4, 19, 0) 100%);
+				background-blend-mode: darken;
+				background-attachment: scroll;
+				overflow: hidden;
+				box-sizing: border-box;
+				box-shadow: 0px 0px 20px inset green;
+			}
+			.portal {
+				position: absolute;
+				box-sizing: border-box;
+			}
+			.portal-indicator {
+				position: relative;
+				z-index: 90;
+				width: 50%;
+				height: 50%;
+			}
+			.portal-indicator-right {
+				float: right;
+			}
+			.portal-name {
+				color: var(--green-primary);
+				border-width: 1px;
+				border-style: solid;
+				width: fit-content;
+				padding: 4px;
+				position: absolute;
+				margin: 0;
+				background-color: black;
+				z-index: 100;
+				box-sizing: border-box;
+			}
+			.portal-line {
+				color: var(--green-primary);
+				border-width: 1px;
+				width: 200%;
+				border-top-style: solid;
+				transform-origin: 0% 0%;
+				transform: rotate(45deg);
+				position: absolute;
+				z-index: 0;
+				top: 0%;
+				box-sizing: border-box;
+			}
+			.portal-indicator-right .portal-line {
+				transform-origin: 100% 0%;
+				right: 0%;
+				transform: rotate(-45deg);
+			}
+			.portal-indicator-right .portal-name {
+				right: 0%;
+			}
+			.portal-node {
+				border-radius: 100%;
+				image-rendering: pixelated;
+				border-width: 1px;
+				border-style: solid;
+				border-color: var(--green-primary);
+				padding: 4px;
+				background-color: black;
+				z-index: 99;
+				box-sizing: border-box;
+				position: absolute;
+				width: calc(100% - 2.5em);
+				aspect-ratio: 1;
+			}
+			.portal-node-right {
+				bottom: 0%;
+				right: 0%;
+			}
+			.portal-node-left {
+				bottom: 0%;
+				left: 0%;
+			}
+			.portal-signal.portal-node-left {
+				bottom: calc(0% - 2.5em / 2);
+				left: calc(0% - 2.5em / 2);
+			}
+			.portal-signal.portal-node-right {
+				bottom: calc(0% - 2.5em / 2);
+				right: calc(0% - 2.5em / 2);
+			}
+			.portal-link:hover .portal-name {
+				border-color: greenyellow;
+				background-color: greenyellow;
+				color: rgb(0, 0, 0);
+			}
+			.portal-link:hover .portal-node {
+				box-shadow: 0px 0px 10px greenyellow;
+			}
+			.portal-crosshair,
+			.portal-crosshair-secondary {
+				position: absolute;
+				box-sizing: border-box;
+				transform: translate(-50%, -50%);
+				z-index: 0;
+				border-radius: 100%;
+			}
+			.portal-crosshair {
+				width: var(--crosshair-size);
+				height: var(--crosshair-size);
+				border-width: 1px;
+				border-style: solid;
+				border-color: var(--green-primary);
+				background-color: rgba(0, 128, 0, 0.397);
+				mix-blend-mode: difference;
+				transition: 0.5s;
+				transition-timing-function: ease-in-out;
+			}
+			.portal-crosshair-secondary {
+				width: var(--crosshair-secondary-size);
+				height: var(--crosshair-secondary-size);
+				border-width: 1px;
+				border-style: solid;
+				border-color: rgb(54, 192, 0);
+				background-color: rgba(0, 128, 0, 0.1);
+				mix-blend-mode: difference;
+				transition: 0.5s;
+				transition-timing-function: ease-in-out;
+			}
+			.portal-crosshair-focused {
+				background-color: rgb(32, 87, 0);
+			}
+			.portal-locked {
+				filter: grayscale();
+			}
+			.portal-locked .portal-name {
+				font-family: "Libre Barcode 39";
+				font-size: 1.5em;
+				height: 1.1em;
+			}
+			#hiding-place .portal-name {
+				font-family: "Consolas";
+				height: auto;
+				font-size: 1em;
+			}
+
+			/** BUTTON */
+			.my-button {
+				position: absolute;
+				bottom: 0%;
+				padding: 0;
+				box-sizing: border-box;
+				height: 31px;
+				margin: 5px;
+			}
+
+			/** MISC NAV */
+			.misc-nav {
+				position: absolute;
+				bottom: 0%;
+				right: 0%;
+				display: flex;
+			}
+			.misc-nav-link {
+				color: var(--green-primary);
+				background-color: black;
+				border-style: solid;
+				border-width: 1px;
+				border-color: var(--green-primary);
+
+				border-right-style: none;
+				border-bottom-style: none;
+				padding: 4px 7px;
+			}
+			.misc-nav-link:hover {
+				background-color: var(--green-primary);
+				color: black;
+			}
+
+			/** LOG */
+			#log-window .window-content {
+				padding: 0;
+			}
+			#log-window .view-all,
+			#log-window h1 {
+				margin: 0;
+			}
+			.entry-header {
+				min-height: 90px;
+				padding-left: 7px;
+				padding-bottom: 10px;
+			}
+
+			/** PATCHES */
+			#patches-window table tr {
+				margin: 10px;
+			}
+			table,
+			th,
+			td {
+				text-align: left;
+				font-family: monospace;
+				font-size: 1.1em;
+			}
+			.patch-date {
+				color: var(--green-primary);
+				vertical-align: top;
+				padding-right: 10px;
+				font-family: monospace;
+			}
+			.patch-content {
+				vertical-align: top;
+				padding-bottom: 7px;
+			}
+			#patches-window .view-all {
+				margin: 0;
+			}
+			#patches-window .window-content {
+				margin: 10px 0px;
+			}
+
+			/** ROADMAP */
+			#roadmap-window ul {
+				list-style: square;
+				text-align: left;
+				padding-left: 20px;
+			}
+			#roadmap-window ul li {
+				margin-bottom: 7px;
+			}
+
+			/** ARTIFACTS */
+			#artifacts-window .window-content {
+				padding: 20px 5px;
+			}
+			.artifacts-extra {
+				display: none;
+			}
+			#artifacts {
+				gap: 10px;
+			}
+
+			/** DIAGNOSTICS */
+			#diagnostics-window {
+				border-top-style: none;
+				overflow: hidden;
+				font-size: 0.8em;
+			}
+			#diagnostics-window p {
+				text-align: left;
+				margin: 0;
+				padding: 5px 5px;
+			}
+			.diagnostics-content {
+				display: flex;
+				gap: 1em;
+			}
+			/** DIALS */
+			.dial-large-container {
+				position: absolute;
+				transition: 2s ease;
+				width: 100%;
+				height: 100%;
+			}
+			.dial-large {
+				aspect-ratio: 1;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 50%;
+				left: 50%;
+				animation-name: dial-spin;
+				animation-timing-function: linear;
+				animation-iteration-count: infinite;
+				object-fit: contain;
+				image-rendering: pixelated;
+			}
+			.dial-large-primary {
+				order: 1;
+				opacity: 0.4;
+				animation-duration: 400s;
+			}
+			.dial-large-secondary {
+				order: 2;
+				opacity: 0.4;
+				animation-duration: 400s;
+				animation-direction: reverse;
+				width: 250%;
+				height: 250%;
+			}
+			.dial-large-tertiary {
+				order: 3;
+				opacity: 0.8;
+				animation-duration: 500s;
+			}
+			.dial-large-quaternary {
+				order: 4;
+				opacity: 0.5;
+				animation-direction: reverse;
+				animation-duration: 500s;
+			}
+			.dial {
+				width: 460px;
+				position: absolute;
+				transition: 2s ease;
+				top: 70%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background-color: black;
+				border-radius: 100%;
+				border-style: solid;
+				border-width: 1px;
+				border-color: var(--dark-blue);
+				z-index: -1;
+				animation-timing-function: ease-in-out;
+				animation-direction: alternate;
+				animation-name: dial-rotate;
+				animation-duration: 20s;
+				animation-iteration-count: infinite;
+				image-rendering: pixelated;
+			}
+			.dial-container {
+				position: absolute;
+				width: 100%;
+				height: 230px;
+				z-index: -1;
+				transform: translate(0%, 0%) scaleY(-1);
+				left: 0%;
+				top: 0%;
+				overflow: hidden;
+			}
+			.dial-container.left {
+				transform: translate(0%, 0%) scaleY(-1) scaleX(-1);
+			}
+			.dial-container.bottom.left {
+				transform: translate(0%, 0%) scaleY(1) scaleX(-1);
+			}
+			.dial-container.bottom {
+				transform: translate(0%, 0%);
+				top: auto;
+				bottom: 0%;
+			}
+
+			/** GRID */
+			.grid {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				order: 10;
+				opacity: 0.3;
+				background-image: url("img/grid-green.png");
+				background-size: 300px;
+
+				animation-name: specks-primary;
+				animation-duration: 60s;
+				animation-timing-function: linear;
+				animation-iteration-count: infinite;
+				animation-direction: alternate;
+				display: none;
+			}
+
+			/** SMALL SCREEN ADJUSTMENTS */
+			@media screen and (max-width: 1350px) {
+				body {
+					overflow-y: auto;
+				}
+				.windows-container {
+					grid-template-columns: 1fr 1fr;
+					grid-template-rows: auto;
+					box-sizing: border-box;
+					gap: 0px;
+				}
+				#navigation-window {
+					width: calc(100%);
+					margin: auto;
+					grid-column: 1 / 3;
+					grid-row: 1 / 1;
+				}
+
+				.base-window {
+					margin: 0;
+				}
+				.window-content {
+					flex-grow: 1;
+				}
+
+				#windows-right-content,
+				#windows-left-content {
+					margin: 0;
+					padding: 0;
+					height: 100%;
+				}
+				#windows-left,
+				#windows-right {
+					height: 100%;
+				}
+				#patches-window {
+					flex-grow: 1;
+				}
+				#roadmap-window {
+					flex-grow: 1;
+				}
+
+				#windows-left {
+					grid-column: 1;
+					grid-row: 2;
+				}
+				#windows-right {
+					grid-column: 2;
+					grid-row: 2;
+				}
+				.windows-column {
+					width: 100%;
+					padding: 0;
+					height: fit-content;
+					overflow-y: initial;
+				}
+				.windows-content {
+					width: calc(100%);
+					padding-left: 0px;
+					margin: auto;
+					gap: 0;
+					height: fit-content;
+				}
+				#portals-window {
+					height: 90dvh;
+				}
+				.dial,
+				.dial-inside,
+				.dial-container {
+					display: none;
+				}
+
+				/** ORDER */
+				#navigation-window {
+					order: 0;
+				}
+				#windows-left {
+					order: 1;
+				}
+				#windows-right {
+					order: 2;
+				}
+				#gallery {
+					order: 1;
+				}
+				#characters {
+					order: 2;
+				}
+				#lab {
+					order: 3;
+				}
+				#comics {
+					order: 4;
+				}
+				#collection {
+					order: 5;
+				}
+				#souvenirs {
+					order: 6;
+				}
+				#guestbook {
+					order: 7;
+				}
+				#hiding-place {
+					order: 8;
+				}
+			}
+
+			/** SMALLER SCREEN ADJUSTMENTS */
+			@media screen and (max-width: 850px) {
+				.windows-container {
+					display: flex;
+					flex-direction: column;
+				}
+				#navigation-window {
+					margin: 0;
+					height: fit-content;
+				}
+				.diagnostics-content {
+					flex-wrap: wrap;
+					gap: 0;
+					padding-bottom: 5px;
+				}
+				#windows-left {
+					display: none;
+				}
+				#windows-right {
+					display: none;
+				}
+				#windows-bottom {
+					display: block;
+				}
+				#portals-window {
+					height: fit-content;
+				}
+				.portals-container {
+					display: flex;
+					flex-wrap: wrap;
+					height: fit-content;
+					padding-top: 20px;
+					padding-bottom: 75px;
+					justify-content: center;
+					align-content: center;
+					align-items: center;
+					justify-items: center;
+				}
+				.portal {
+					position: relative !important;
+					width: 45vw !important;
+					height: fit-content !important;
+					top: 0% !important;
+					left: 0% !important;
+					right: 0% !important;
+					bottom: 0% !important;
+				}
+				.portal-node {
+					position: relative !important;
+					z-index: 900 !important;
+					margin: 10px;
+				}
+				.portal-line {
+					display: none;
+				}
+				.portal-indicator {
+					position: absolute;
+					width: 100% !important;
+					height: 100%;
+					z-index: 999 !important;
+				}
+				.portal-name {
+					position: absolute;
+					left: 50% !important;
+					top: calc(50%) !important;
+					transform: translate(-50%, -50%);
+					font-size: 1.5em;
+				}
+				.portal-crosshair,
+				.portal-crosshair-secondary {
+					display: none;
+				}
+				.portal-locked {
+					display: none;
+					width: 0 !important;
+					height: 0 !important;
+					position: absolute !important;
+				}
+				#hat-face {
+					display: block;
+				}
+				#hat-smile {
+					display: none;
+				}
+				#navigation-hat {
+					position: absolute;
+					height: 100px;
+				}
+				.dial-large-primary {
+					width: 100%;
+					height: 100%;
+				}
+				.dial-large-secondary {
+					width: 100%;
+					height: 100%;
+				}
+				.dial-large-tertiary {
+					width: 100%;
+					height: 100%;
+				}
+				.dial-large-quaternary {
+					width: 110%;
+					height: 110%;
+				}
+				#portals-window {
+					background: none;
+					box-shadow: 0px 0px 30px inset green;
+				}
+				.misc-nav {
+					width: calc(100%);
+					flex-wrap: wrap;
+				}
+				.misc-nav a {
+					flex-grow: 1;
+				}
+				.my-button {
+					bottom: 31px;
+				}
+				#navigation-hat {
+					border-style: none;
+					background-color: transparent;
+				}
+			}
+
+			/** This is a rare case. */
+			@media screen and (max-height: 730px) {
+				.windows-column {
+					justify-content: unset;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="windows-container">
+				<div id="navigation-window">
+					<!-- NAVIGATION TOP -->
+					<div id="navigation-top">
+						<div id="navigation-hat-wrapper">
+							<div id="navigation-hat">
+								<img id="hat-smile" src="img/smile.png" />
+								<p id="hat-face">X X</p>
+							</div>
+						</div>
+						<div id="navigation-title">
+							<h1>espy.world</h1>
+						</div>
+						<div id="power-off">
+							<a href="index.html#" id="power-off-link"
+								><img id="power-off-image" src="svg/power-off.svg"
+							/></a>
+						</div>
+					</div>
+					<!-- PORTALS -->
+					<div class="base-window" id="portals-window">
+						<div class="dial-large-container">
+							<img
+								class="dial-large dial-large-primary"
+								src="img/dial-large-1.png"
+							/>
+							<img
+								class="dial-large dial-large-secondary"
+								src="img/dial-large-2.png"
+							/>
+							<img
+								class="dial-large dial-large-tertiary"
+								src="img/dial-large-3.png"
+							/>
+							<img
+								class="dial-large dial-large-quaternary"
+								src="img/dial-large-4.png"
+							/>
+							<div class="grid"></div>
+						</div>
+						<div class="portal-crosshair" id="portal-crosshair"></div>
+						<div
+							class="portal-crosshair-secondary"
+							id="portal-crosshair-secondary"
+						></div>
+						<div class="portals-container">
+							<home-portal
+								id="gallery"
+								img="/img/circle-2.gif"
+								link="/gallery.html"
+								name="gallery"
+								right="calc(50% - (100px * var(--portal-scale)))"
+								size="calc(250px * var(--portal-scale))"
+								top="calc(50% - (120px * var(--portal-scale)))"
+							></home-portal>
+							<home-portal
+								id="comics"
+								img="/img/circle-5.gif"
+								link="/comics.html"
+								name="comics"
+								node-align="portal-node-left"
+								right="calc(50% - (220px * var(--portal-scale)))"
+								size="calc(150px * var(--portal-scale))"
+								top="calc(50% - (200px * var(--portal-scale)))"
+							></home-portal>
+							<home-portal
+								id="lab"
+								img="/img/circle-1.gif"
+								link="/lab.html"
+								name="lab"
+								node-align="portal-node-left"
+								right="calc(50% - (220px * var(--portal-scale)))"
+								size="calc(180px * var(--portal-scale))"
+								top="calc(50% + (10px * var(--portal-scale)))"
+							></home-portal>
+							<home-portal
+								id="collection"
+								img="/img/circle-4.gif"
+								link="/espeon.html"
+								name="collection"
+								right="calc(50% + (120px * var(--portal-scale)))"
+								size="calc(130px * var(--portal-scale))"
+								top="calc(50% + (30px * var(--portal-scale)))"
+							></home-portal>
+							<home-portal
+								id="guestbook"
+								img="/img/circle-9.gif"
+								link="/guestbook.html"
+								name="guestbook"
+								right="calc(50% - (360px * var(--portal-scale)))"
+								size="calc(130px * var(--portal-scale))"
+								top="calc(50% - (50px * var(--portal-scale)))"
+							></home-portal>
+							<home-portal
+								id="characters"
+								img="/img/circle-6.gif"
+								link="/characters.html"
+								name="characters"
+								right="calc(50% + (200px * var(--portal-scale)))"
+								size="calc(200px * var(--portal-scale))"
+								top="calc(50% - (200px * var(--portal-scale)))"
+							></home-portal>
+							<!-- LOCKED PORTAL(S) -->
+							<home-portal
+								id="souvenirs"
+								img="/img/circle-7.gif"
+								link="/souvenirs.html"
+								locked="true"
+								name="souvenirs"
+								node-align="portal-node-left"
+								right="calc(50% + (0px * var(--portal-scale)))"
+								size="calc(70px * var(--portal-scale))"
+								top="calc(50% - (250px * var(--portal-scale)))"
+							></home-portal>
+							<!-- SECRET PORTAL :) -->
+							<home-portal
+								id="hiding-place"
+								img="/img/hole.gif"
+								link="/hiding-place.html"
+								locked="true"
+								name="???"
+								right="calc(50% + (0px * var(--portal-scale)))"
+								size="calc(70px * var(--portal-scale))"
+								top="calc(50% + (200px * var(--portal-scale)))"
+							></home-portal>
+						</div>
+						<!-- MISC NAVIGATION -->
+						<div class="misc-nav">
+							<a href="sitemap.html"
+								><div class="misc-nav-link sitemap">
+									<span>SITEMAP</span>
+								</div></a
+							>
+							<a href="info.html"
+								><div class="misc-nav-link info">
+									<span>INFO</span>
+								</div></a
+							>
+							<a href="about.html"
+								><div class="misc-nav-link about-webmaster">
+									<span>ABOUT THE WEBMASTER</span>
+								</div></a
+							>
+						</div>
+
+						<div class="my-button">
+							<a href="station.html"><img src="img/button.gif" /></a>
+						</div>
+					</div>
+					<!-- DIAGNOSTICS-->
+					<div class="base-window" id="diagnostics-window">
+						<div class="diagnostics-content">
+							<p>HITS: <span id="hitcount"></span></p>
+							<p>VIEWS: <span id="viewcount"></span></p>
+							<p>CREATED: <span id="createdate"></span></p>
+							<p>LAST UPDATED: <span id="lastupdated"></span></p>
+						</div>
+					</div>
+				</div>
+				<!-- WINDOWS RIGHT -->
+				<div class="windows-column" id="windows-right">
+					<div class="dial-container right">
+						<img class="dial" src="img/dials.gif" />
+					</div>
+					<div class="dial-container bottom right">
+						<img class="dial" src="img/dials.gif" />
+					</div>
+					<div class="windows-content" id="windows-right-content">
+						<!-- ROADMAP -->
+						<div class="base-window" id="roadmap-window">
+							<div class="window-title">
+								<h1>ROADMAP</h1>
+							</div>
+							<div class="window-content">
+								<roadmap-display type="updates"></roadmap-display>
+							</div>
+							<a href="roadmap.html">
+								<div class="view-all">
+									<p>VIEW ALL</p>
+								</div>
+							</a>
+						</div>
+						<!-- ARTIFACTS -->
+						<div class="base-window" id="artifacts-window">
+							<div class="window-title">
+								<h1>ARTIFACTS</h1>
+							</div>
+							<div class="window-content">
+								<artifacts-display></artifacts-display>
+							</div>
+							<a href="artifacts.html">
+								<div class="view-all">
+									<p>VIEW ALL</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- WINDOWS LEFT -->
+				<div class="windows-column" id="windows-left">
+					<div class="dial-container left">
+						<img class="dial" src="img/dials.gif" />
+					</div>
+					<div class="dial-container bottom left">
+						<img class="dial" src="img/dials.gif" />
+					</div>
+					<div class="windows-content" id="windows-left-content">
+						<!-- LOG -->
+						<div class="base-window" id="log-window">
+							<div class="window-title">
+								<h1>LATEST LOG ENTRY</h1>
+							</div>
+							<div class="window-content">
+								<div id="latest-log-entry"></div>
+								
+							</div>
+							<a href="log.html">
+								<div class="view-all">
+									<p>VIEW ALL</p>
+								</div>
+							</a>
+						</div>
+						<!-- PATCHES -->
+						<div class="base-window" id="patches-window">
+							<div class="window-title">
+								<h1>PATCH NOTES</h1>
+							</div>
+							<div class="window-content">
+								
+								<table id="patch-list"></table>
+							</div>
+							<a href="patches.html">
+								<div class="view-all">
+									<p>VIEW ALL</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="windows-bottom"></div>
+			</div>
+		</div>
+		<!-- SCRIPTS -->
+		<script src="js/patches-util.js"></script>
+		<script src="js/logs-util.js"></script>
+		<script src="js/diagnostics.js"></script>
+		<!-- BLOCK VARIABLES -->
+		<script>
+			const rootTheme = document.querySelector(":root");
+			const homePortals = document.getElementsByTagName("home-portal");
+			const portalsWindow = document.getElementById("portals-window");
+
+			const logWindow = document.getElementById("log-window");
+			const patchesWindow = document.getElementById("patches-window");
+			const artifactsWindow = document.getElementById("artifacts-window");
+			const roadmapWindow = document.getElementById("roadmap-window");
+
+			const windowsLeftContent = document.getElementById(
+				"windows-left-content"
+			);
+			const windowsRightContent = document.getElementById(
+				"windows-right-content"
+			);
+			const windowsBottom = document.getElementById("windows-bottom");
+		</script>
+		<!-- SMALL SCREEN SCRIPT -->
+		<script>
+			let smallScreenWindows = false;
+			let smallScreenWidth = 850;
+
+			adjustWindowsToScreen();
+
+			addEventListener("resize", (event) => {
+				adjustWindowsToScreen();
+			});
+
+			function adjustWindowsToScreen() {
+				if (window.innerWidth <= smallScreenWidth && !smallScreenWindows) {
+					windowsBottom.appendChild(logWindow);
+					windowsBottom.appendChild(roadmapWindow);
+					windowsBottom.appendChild(patchesWindow);
+					windowsBottom.appendChild(artifactsWindow);
+					smallScreenWindows = true;
+				} else if (window.innerWidth > smallScreenWidth && smallScreenWindows) {
+					windowsLeftContent.appendChild(logWindow);
+					windowsLeftContent.appendChild(patchesWindow);
+					windowsRightContent.appendChild(roadmapWindow);
+					windowsRightContent.appendChild(artifactsWindow);
+					smallScreenWindows = false;
+				}
+			}
+		</script>
+		<!-- LOG SCRIPT -->
+		<script>
+			let latestLogEntryAttached = false;
+
+			async function populateLatestLogEntry() {
+				const latestLogEntryDiv = document.getElementById("latest-log-entry");
+				const latestLogEntry = await getLatestLogEntry();
+				if (!latestLogEntryAttached) {
+					latestLogEntryDiv.appendChild(createLogListEntry(latestLogEntry));
+					latestLogEntryAttached = true;
+				}
+			}
+			populateLatestLogEntry();
+		</script>
+		<!-- PATCHES SCRIPT -->
+		<script>
+			async function populateLatestPatches() {
+				const patchTable = document.getElementById("patch-list");
+				const latestPatches = await getLatestPatches(9);
+
+				for (let patch of latestPatches) {
+					const tableRow = document.createElement("tr");
+					patchTable.appendChild(tableRow);
+
+					const patchDate = document.createElement("td");
+					patchDate.className = "patch-date";
+					patchDate.innerHTML = patch[0];
+					tableRow.appendChild(patchDate);
+
+					const patchContent = document.createElement("td");
+					patchContent.className = "patch-content";
+					patchContent.innerHTML = patch[1];
+					tableRow.appendChild(patchContent);
+				}
+			}
+			populateLatestPatches();
+		</script>
+		<!-- CROSSHAIR MOUSE SCRIPT -->
+		<script>
+			const crosshair = document.getElementById("portal-crosshair");
+			const crosshairSecondary = document.getElementById(
+				"portal-crosshair-secondary"
+			);
+
+			let windowX = portalsWindow.getBoundingClientRect().left;
+
+			window.onresize = function () {
+				windowX = portalsWindow.getBoundingClientRect().left;
+			};
+
+			document.body.onpointermove = (event) => {
+				const { clientX, clientY } = event;
+
+				crosshair.animate(
+					{
+						left: `${clientX + window.scrollX - windowX}px`,
+						top: `calc(${clientY + window.scrollY}px - var(--top-height))`,
+					},
+					{ duration: 0, fill: "forwards" }
+				);
+
+				if (
+					!crosshairSecondary.className.includes("portal-crosshair-focused")
+				) {
+					crosshairSecondary.animate(
+						{
+							left: `${clientX + window.scrollX - windowX}px`,
+							top: `calc(${clientY + window.scrollY}px - var(--top-height))`,
+						},
+						{ duration: 100, fill: "forwards" }
+					);
+				}
+			};
+
+			for (let homePortal of homePortals) {
+				homePortal.onmouseover = function (event) {
+					crosshairSecondary.className += " portal-crosshair-focused";
+					const portalNode = homePortal
+						.querySelector(".portal-link")
+						.querySelector(".portal-node");
+
+					const portalNodeRect = portalNode.getBoundingClientRect();
+
+					crosshairSecondary.animate(
+						{
+							top: `calc(${portalNodeRect.top + window.scrollY}px + ${
+								portalNodeRect.height / 2
+							}px - var(--top-height))`,
+							left: `calc(${portalNodeRect.left + window.scrollX}px + ${
+								portalNodeRect.width / 2
+							}px - ${windowX}px)`,
+							width: `calc(${portalNode.width}px + 50px)`,
+							height: `calc(${portalNode.width}px + 50px)`,
+						},
+						{
+							duration: 100,
+							fill: "forwards",
+							easing: "cubic-bezier(0.12, 0, 0.39, 0)",
+						}
+					);
+				};
+				homePortal.onmouseleave = function (event) {
+					crosshairSecondary.className = "portal-crosshair-secondary";
+					crosshairSecondary.animate(
+						{
+							width: `calc(var(--crosshair-secondary-size))`,
+							height: `calc(var(--crosshair-secondary-size))`,
+						},
+						{
+							duration: 100,
+							fill: "forwards",
+							easing: "cubic-bezier(0.12, 0, 0.39, 0)",
+						}
+					);
+				};
+			}
+		</script>
+		<!-- SECRET PORTAL SCRIPT -->
+		<script>
+			const hidingPlacePortal = document.getElementById("hiding-place");
+			if (Math.floor(Math.random() * 101) > 90) {
+				hidingPlacePortal.setAttribute("locked", "false");
+			}
+		</script>
+		<!-- SCALING SCRIPT -->
+		<script>
+			const maxWidth = 900;
+			const maxHeight = 954;
+			const maxScale = 1.2;
+
+			setPortalScale();
+
+			addEventListener("resize", (event) => {
+				setPortalScale();
+			});
+
+			function setPortalScale() {
+				const newWidthScale = Math.min(
+					1 * (portalsWindow.clientWidth / maxWidth),
+					maxScale
+				);
+				rootTheme.style.setProperty("--portal-scale", newWidthScale);
+			}
+		</script>
+	</body>
+</html>

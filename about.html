@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" name="viewport"/>
+<link href="manifest.json" rel="manifest"/>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<meta charset="utf-8"/>
+<title>about</title>
+<link href="style.css" media="all" rel="stylesheet" type="text/css"/>
+<style>
+			@keyframes animated-texture {
+				from {
+					background-position: 0 0;
+				}
+				to {
+					background-position: 1000px 1000px;
+				}
+			}
+
+			.portrait {
+				border-style: outset;
+				border-color: rgb(79, 138, 67);
+				height: 40vw;
+				max-height: 400px;
+				min-height: 300px;
+			}
+			.about-title {
+				color: rgb(136, 204, 136);
+				background-color: black;
+				width: fit-content;
+				margin: auto;
+				margin-bottom: 10px;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			.about-box {
+				text-align: left;
+				border-style: double;
+				border-width: 3px;
+				border-color: var(--dark-green);
+				width: 90vw;
+				max-width: 800px;
+				margin: auto;
+				background: rgb(0, 0, 0);
+			}
+
+			.description {
+				padding: 1.3em;
+			}
+
+			.about-secondary {
+				margin: 0;
+			}
+			.about-primary {
+				color: rgb(212, 185, 211);
+				margin: 0;
+			}
+			.about-container {
+				margin-top: 5vh;
+			}
+
+			body {
+				background-image: url(img/texture-2.png);
+				animation: animated-texture 300s linear infinite;
+				background-size: 500px 500px;
+			}
+
+			@media screen and (max-width: 600px) {
+				body {
+					margin: 0;
+				}
+				.about-box {
+					text-align: left;
+					border-style: double;
+					border-width: 3px;
+					border-color: var(--dark-green);
+					width: 100%;
+					margin: auto;
+					background: rgb(0, 0, 0);
+					box-sizing: border-box;
+					border-left-style: none;
+					border-right-style: none;
+					border-bottom-style: none;
+				}
+			}
+		</style>
+</head>
+<body>
+<a class="back-button" href="home.html">back</a>
+<div class="about-container" style="display: flex; flex-direction: column; gap: 10px">
+<div style="flex: 1">
+<h3 class="about-title">Who am I?</h3>
+<img class="portrait" src="img/minus.png"/>
+</div>
+<div style="flex: 1">
+<div class="about-box">
+<div class="description">
+<p class="about-primary">
+							𓆦 I am often called <b>"Espy"</b>. 𓆦<br/>
+</p>
+<p class="about-secondary">
+<br/>
+							I love finding sincerity in the absurd.<br/>
+							I love mixing things that shouldn’t mix.<br/>
+							I love treating the silly and stupid with as much respect as
+							anything else.<br/>
+<br/>
+							I've always characterized myself as a "mad scientist".<br/>
+							I don't know if that characterization is still apt, but it's
+							comfortable to me.<br/>
+<br/>
+							I hold great value in new experiences.<br/>
+<br/>
+							I used to try to avoid being anyone at all.<br/>
+							But perhaps one day, I could be everyone at once.<br/>
+<br/>
+							Don't be the reason someone else has to live in fear.<br/>
+							Your words can wound. But they can bring hope, as well.<br/>
+</p>
+<br/>
+<p class="about-primary">
+							𓆦 I wish you peace and happiness, whoever you may be. 𓆦<br/>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

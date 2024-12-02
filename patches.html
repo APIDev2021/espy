@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="manifest.json" rel="manifest" />
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>patches</title>
+		<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+		<style>
+			.container {
+				max-width: 700px;
+				margin: auto;
+				border-style: double;
+				border-color: var(--dark-green);
+				padding: 20px;
+				margin-top: 20px;
+				background-color: rgba(0, 0, 0, 0.911);
+				position: relative;
+			}
+
+			.title {
+				margin-top: 0;
+				text-align: left;
+				color: var(--lime-green);
+				font-family: "Silkscreen";
+			}
+
+			ul {
+				list-style-type: square;
+			}
+
+			li {
+				margin: 10px;
+				font-family: monospace;
+				font-size: 1.1em;
+				line-height: 1.2em;
+			}
+
+			details {
+				text-align: left;
+				color: rgb(227, 255, 161);
+				background-image: url("img/texture-6.png");
+				background: linear-gradient(
+						90deg,
+						rgba(3, 78, 42, 1) 0%,
+						rgba(0, 0, 0, 1) 100%
+					),
+					url("img/texture-1.png");
+				background-blend-mode: multiply;
+			}
+
+			summary {
+				cursor: pointer;
+				user-select: none;
+				font-size: 1.1em;
+				font-weight: bold;
+				padding: 15px 5px 10px 10px;
+				border-color: rgb(117, 160, 0);
+				border-width: 1px;
+				border-style: solid;
+				background: linear-gradient(
+					90deg,
+					rgba(3, 78, 42, 1) 0%,
+					rgba(36, 142, 94, 1) 42%,
+					rgba(85, 126, 5, 1) 82%
+				);
+			}
+
+			.patches {
+				display: flex;
+				flex-direction: column;
+				gap: 2em;
+			}
+			#version-display {
+				position: absolute;
+				top: 0%;
+				right: 0%;
+				margin: 1em;
+				color: yellow;
+			}
+
+			@media screen and (max-width: 600px) {
+				body {
+					background: url("img/machine-dark.png");
+					background-size: 300px;
+					margin: 0px;
+				}
+
+				.container {
+					padding: 15px;
+				}
+
+				details {
+					margin-left: -15px;
+					margin-right: -15px;
+				}
+
+				.patches {
+					gap: 1em;
+				}
+
+				summary {
+					border-left-style: none;
+					border-right-style: none;
+				}
+			}
+		</style>
+	</head>
+	<body class="rainbow-machine">
+		<a class="back-button" href="home.html">back</a>
+		<br />
+		<div class="container">
+			<p id="version-display">v.<span id="version"></span></p>
+			<h2 class="title">PATCH NOTES</h2>
+			
+			<div class="patches" id="patches-wrapper"></div>
+		</div>
+		<script src="js/patches-util.js"></script>
+		<script>
+			displayPatches();
+
+			const getManifest = async () => {
+				const res = await fetch("/manifest.json");
+				const data = await res.json();
+				return data;
+			};
+
+			var versionElement = document.getElementById("version");
+			let manifestPromise = getManifest();
+			manifestPromise.then((manifest) => {
+				versionElement.textContent = manifest.version;
+			});
+		</script>
+	</body>
+</html>

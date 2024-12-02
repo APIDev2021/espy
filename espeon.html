@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="manifest.json" rel="manifest" />
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>espeons</title>
+		<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+		<link
+			href="style/modal.css"
+			media="all"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=Exo+2"
+			rel="stylesheet"
+		/>
+		<script src="component/modal-core.js" type="text/javascript"></script>
+		<style>
+			/** ANIMATION */
+			@keyframes vertical-movement {
+				0% {
+					background-position: 0 0, 0px 250px;
+				}
+			}
+			@keyframes animated-bg {
+				from {
+					background-position: 0 0;
+				}
+				to {
+					background-position: 200px 200px;
+				}
+			}
+
+			/** BODY */
+			body {
+				margin: auto;
+				background-image: url(img/espeon-tile.png);
+				background-size: 200px;
+				animation: animated-bg 80s linear infinite;
+				overflow-y: scroll;
+				margin: 0;
+				padding: 0;
+			}
+			#page-container {
+				display: flex;
+				flex-direction: column;
+				gap: 0;
+				margin: 0;
+				padding: 0;
+				min-height: 100dvh;
+				height: 100%;
+			}
+			#nothing-here {
+				position: relative;
+				flex-grow: 1;
+				display: none;
+			}
+			#nothing-here p {
+				position: absolute;
+				width: fit-content;
+				padding: 0;
+				margin: 0;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				font-family: "Silkscreen";
+				font-size: 1.2em;
+			}
+
+			/** BANNER */
+			#banner {
+				position: relative;
+				min-height: 60px;
+				background: linear-gradient(
+						90deg,
+						rgba(32, 22, 18, 1) 0%,
+						rgba(99, 139, 131, 1) 8%,
+						rgb(226, 139, 190) 50%,
+						rgba(99, 139, 131, 1) 92%,
+						rgba(32, 22, 18, 1) 100%
+					),
+					url(img/kaleidoscope-1.jpg);
+				animation-timing-function: linear;
+				animation-name: vertical-movement;
+				animation-duration: 8s;
+				animation-iteration-count: infinite;
+				background-blend-mode: multiply;
+				border-style: double;
+				border-color: rgb(57, 133, 14);
+				box-sizing: border-box;
+			}
+			.heading {
+				position: relative;
+				text-wrap: nowrap;
+				color: rgb(219, 255, 214);
+				text-shadow: 0 0 10px #ffffff77, 0 0 20px #ffffff77, 0 0 30px #ffffff77,
+					0 0 40px #ffffff77, 0 0 50px #ffffff77, 0 0 60px #ffffff77,
+					0 0 70px #ffffff77;
+				font-family: "Silkscreen";
+				margin: 13px 0px;
+			}
+			.heading-container {
+				display: flex;
+				flex-direction: column;
+				position: relative;
+				height: 100%;
+				align-items: center;
+				justify-content: center;
+			}
+			#espeon-doll {
+				position: absolute;
+				right: 0;
+				top: 50%;
+				transform: translate(0%, -50%);
+			}
+
+			/** VIEW SETTINGS */
+			#view-settings {
+				display: flex;
+				width: fit-content;
+				height: fit-content;
+				padding: 10px 10px;
+				gap: 2em;
+				font-family: monospace;
+				font-size: 1.1em;
+				color: rgb(153, 176, 197);
+			}
+			#filters,
+			#sorts {
+				display: flex;
+				gap: 1em;
+			}
+			#filters-title,
+			#sorts-title {
+				height: fit-content;
+				margin: 0;
+				font-family: "Silkscreen";
+				color: rgb(72, 179, 1);
+			}
+			.view-input {
+				margin-top: 2px;
+				color: rgb(157, 255, 0);
+			}
+			.filter-option,
+			.sort-option {
+				accent-color: rgb(157, 255, 0);
+			}
+
+			/* RANDOM BUTTON */
+			button.random {
+				position: fixed;
+				bottom: 1%;
+				right: 1%;
+				background-image: url("img/kaleidoscope-dark-1.jpg");
+				border-color: rgb(67, 128, 97);
+				z-index: 2;
+				font-weight: bold;
+				font-size: 1.1em;
+				color: rgb(235, 110, 162);
+			}
+			button.random:hover {
+				background-image: url("img/kaleidoscope-darker-1.jpg");
+				border-color: rgb(53, 47, 47);
+				color: rgb(70, 192, 121);
+			}
+
+			/** SIZE ADJUSTMENTS */
+			@media screen and (max-width: 600px) {
+				.heading {
+					max-width: 50vw;
+					text-wrap: wrap;
+					font-size: 1.1em;
+					text-shadow: none;
+				}
+				#view-settings {
+					flex-direction: column;
+					gap: 5px;
+				}
+				.modal-nav {
+					display: none;
+				}
+				#modal-wrapper {
+					width: 100%;
+					max-width: none;
+				}
+				#modal-container {
+					width: 100%;
+					margin: 0;
+					gap: 1em;
+				}
+				.dynamic-grid-row {
+					max-height: 300px;
+				}
+				.static-grid-cell {
+					max-width: 50%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			0;
+		</script>
+		<!-- AUDIO -->
+		<audio id="espeon-cry">
+			<source src="audio/espeon-cry.mp3" type="audio/mp3" />
+		</audio>
+		<!-- BANNER -->
+		<div id="page-container">
+			<div id="banner">
+				<a class="back-button" href="home.html">back</a>
+				<div class="heading-container">
+					<h2 class="heading" id="heading">My Espeon Collection!</h2>
+				</div>
+				<img id="espeon-doll" src="img/espeon.gif" />
+			</div>
+			<!-- VIEW SETTINGS -->
+			<div id="view-settings">
+				<div id="filters">
+					<p id="filters-title">FILTERS</p>
+					<div class="view-input">
+						<input
+							checked=""
+							id="non-tcg-filter"
+							name="Non-TCG"
+							type="checkbox"
+							class="filter-option"
+						/>
+						<label for="non-tcg">Non-TCG</label>
+					</div>
+					<div class="view-input">
+						<input
+							checked=""
+							id="tcg-filter"
+							class="filter-option"
+							name="TCG"
+							type="checkbox"
+						/>
+						<label for="tcg">TCG</label>
+					</div>
+				</div>
+				<div id="sorts">
+					<p id="sorts-title">SORT</p>
+					<div class="view-input">
+						<input
+							id="ascending-sort"
+							class="sort-option"
+							name="sort"
+							type="radio"
+							value="ascending"
+						/>
+						<label for="ascending">ascending</label>
+					</div>
+					<div class="view-input">
+						<input
+							checked=""
+							id="descending-sort"
+							class="sort-option"
+							name="sort"
+							type="radio"
+							value="descending"
+						/>
+						<label for="descending">descending</label>
+					</div>
+				</div>
+			</div>
+			<!-- MODAL -->
+			<modal-core id="modal-core"></modal-core>
+			<div id="nothing-here"><p>Nothing here!</p></div>
+		</div>
+		<!-- RANDOM BUTTON -->
+		<button class="random" id="random-button">random</button>
+		<!-- SCRIPTS -->
+		<script src="js/espeon-collection-util.js"></script>
+		<script src="js/modal.js"></script>
+		<script>
+			/** CONSTANTS */
+			const SIZE_GOAL = 300;
+			const SMALL_SIZE_GOAL = 300;
+
+			/** Initialize view settings (filters and sorts). */
+			function initializeViewSettings() {
+				nonTcgFilter = document.getElementById("non-tcg-filter");
+				tcgFilter = document.getElementById("tcg-filter");
+				ascendingSort = document.getElementById("ascending-sort");
+				descendingSort = document.getElementById("descending-sort");
+
+				ascendingSort.onclick = function () {
+					onSourceChanged();
+				};
+
+				descendingSort.onclick = function () {
+					onSourceChanged();
+				};
+
+				tcgFilter.onclick = function () {
+					onSourceChanged();
+				};
+
+				nonTcgFilter.onclick = function () {
+					onSourceChanged();
+				};
+			}
+
+			/** Return source array with filters. */
+			function onSourceChanged() {
+				let sources = getSources();
+				if (tcgFilter.checked == false) {
+					sources = sources.filter((source) => {
+						if (source.tags?.includes("tcg")) {
+							return false;
+						} else {
+							return true;
+						}
+					});
+				}
+				if (nonTcgFilter.checked == false) {
+					sources = sources.filter((source) => {
+						if (source.tags?.includes("tcg")) {
+							return true;
+						} else {
+							return false;
+						}
+					});
+				}
+				if (ascendingSort.checked) {
+					sources.reverse();
+				}
+
+				modalHandler.updateSources(sources);
+				if (sources.length <= 0) {
+					nothingHere.style.display = "block";
+				} else {
+					nothingHere.style.display = "none";
+				}
+
+				return sources;
+			}
+
+			/** Get source array from espeon data. */
+			function getSources() {
+				return Array.from(espeons, (esp) => {
+					let img = "";
+
+					if (esp.tags?.includes("tcg")) {
+						img = `${"/img/espeon/tcg/"}${esp.img}${".jpg"}`;
+					} else {
+						img = `${"/img/espeon/"}${esp.img}`;
+					}
+
+					return {
+						img: img,
+						title: esp.title,
+						desc: esp.desc,
+						tags: esp.tags,
+					};
+				});
+			}
+
+			/** Initializes espeons modal */
+			function initializeEspeonsModal(espeons) {
+				const sources = getSources();
+
+				const espeonsModal = new Modal({
+					modalCore: document.getElementById("modal-core"),
+					gridElement: document.getElementById("modal-grid"),
+					sources: sources,
+					smallScreenEnabled: true,
+				});
+				return espeonsModal;
+			}
+
+			/** Initializes espeons doll. */
+			function initializeEspeonDoll() {
+				var espeonCry = document.getElementById("espeon-cry");
+				var espeonDoll = document.getElementById("espeon-doll");
+
+				espeonDoll.onclick = function (event) {
+					espeonCry.play();
+				};
+			}
+
+			/** Initializes collection grid and modal. */
+			async function initializeCollection() {
+				// Gets espeon data if it is empty
+				if (espeons.length <= 0) {
+					var collection = await getEspeonsData();
+					espeons = collection;
+					modalHandler = initializeEspeonsModal(espeons);
+					modalHandler.initializeWithDynamicGrid(SIZE_GOAL, SMALL_SIZE_GOAL);
+					// modalHandler.initializeWithStaticGrid(250, 250);
+					onSourceChanged();
+				}
+			}
+
+			var body = document.getElementById("body");
+			var heading = document.getElementById("heading");
+			var banner = document.getElementById("banner");
+			var nothingHere = document.getElementById("nothing-here");
+
+			var modalHandler;
+			var tcgFilter;
+			var nonTcgFilter;
+			var ascendingSort;
+			var descendingSort;
+			var espeons = [];
+
+			initializeEspeonDoll();
+			initializeCollection();
+			initializeViewSettings();
+		</script>
+	</body>
+</html>

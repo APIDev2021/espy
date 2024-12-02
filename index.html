@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="manifest.json" rel="manifest" />
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>==ESPY.WORLD==</title>
+		<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+		<style>
+			:root {
+				/* SCALE */
+				--scale: 1;
+
+				/* COLORS */
+				--inspect-color: rgb(255, 255, 0);
+				--inspect-color-subtle: rgba(255, 255, 0, 0.5);
+
+				/* DEMON */
+				--demon-top-offset: calc(30px * var(--scale));
+				--demon-image-width: 527px;
+
+				/* Z-INDEX */
+				--demon-z: 10;
+				--email-z: 999;
+				--enter-z: 100;
+				--inspect-z: 13;
+				--random-quote-z: 9;
+				--fixed-z: 100;
+
+				/* SMALL SCREEN VARIABLES */
+				--sm-brain-width: 100px;
+				--sm-margin: 20px;
+			}
+
+			/** ANIMATION */
+			@keyframes vertical-brains {
+				0% {
+					background-position: 0px 0px;
+				}
+				100% {
+					background-position: 0px 550px;
+				}
+			}
+			@keyframes horizontal-texture {
+				0% {
+					background-position: 0px 0px;
+				}
+				100% {
+					background-position: 666px 0px;
+				}
+			}
+			@keyframes floating {
+				0% {
+					transform: translate(0px, 0px);
+				}
+				100% {
+					transform: translate(0px, 5px);
+				}
+			}
+			@keyframes brains-glow {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0.5;
+				}
+			}
+
+			/** BODY */
+			html {
+				scroll-behavior: smooth;
+			}
+			body {
+				background: url("img/mountain-dark.png");
+				background-position: 50% 50%;
+				background-size: 1000px 1000px;
+				margin: 0;
+				height: 100dvh;
+				overflow: hidden;
+
+				animation-name: color-shift;
+				animation-duration: 0s;
+				animation-timing-function: linear;
+				animation-iteration-count: infinite;
+				animation-direction: alternate;
+			}
+			.top-left {
+				top: 0%;
+				left: 0%;
+			}
+			.bottom-right {
+				bottom: 0%;
+				right: 0%;
+				transform: rotate(-180deg);
+			}
+			.small-screen-only {
+				display: none;
+			}
+
+			/* PLANE */
+			.plane-container {
+				position: absolute;
+				overflow: hidden;
+				width: 100%;
+				height: fit-content;
+			}
+			.plane-container img {
+				width: 100%;
+				height: 200px;
+				image-rendering: pixelated;
+				margin: 0;
+				padding: 0;
+				opacity: 0.5;
+			}
+			#plane-top {
+				top: 0%;
+				transform: scaleY(-1);
+			}
+			#plane-bottom {
+				bottom: 0%;
+			}
+
+			/* WINDOWS */
+			#windows-container {
+				position: absolute;
+				overflow: none;
+				margin: auto;
+
+				display: grid;
+				grid: repeat(4, 1fr) / repeat(4, 1fr);
+				justify-items: center;
+
+				height: calc(412px * var(--scale));
+				width: 100%;
+
+				top: 50%;
+				transform: translate(0%, -50%);
+				opacity: 0.5;
+			}
+			.mini-window {
+				width: calc(100% - 20px);
+				height: calc(200px * var(--scale));
+				opacity: 0.5;
+				margin: 5px;
+
+				border-style: groove;
+				border-width: 3px;
+				border-color: rgba(255, 255, 255, 0.363);
+
+				background-image: url("art/2021/counting.gif");
+				background-size: cover;
+				background-position: center center;
+
+				filter: grayscale();
+				image-rendering: pixelated;
+				object-fit: cover;
+			}
+
+			/** FULL CONTAINER */
+			#full-container {
+				height: 100vh;
+				width: 100%;
+				margin: auto;
+				position: relative;
+				display: flex;
+				justify-content: center;
+			}
+
+			/** MAIN CONTAINER */
+			#main-container {
+				height: 100dvh;
+				width: 100vw;
+				position: relative;
+				max-width: 1100px;
+				display: flex;
+				justify-content: center;
+			}
+
+			/** BRAINS */
+			.brains-container {
+				width: 300px;
+				margin: 0px 10px;
+				position: relative;
+			}
+			.brains-container.left {
+				transform: scaleX(-1);
+				margin-left: 0;
+			}
+			.brains-container.right {
+				margin-right: 0;
+			}
+			.brains-glow {
+				position: absolute;
+				left: 50%;
+				transform: translate(-50%, 0%);
+
+				width: 100px;
+				height: 100%;
+
+				box-shadow: 0px 0px 150px rgb(255, 90, 228);
+				animation: brains-glow 10s ease-in-out alternate infinite;
+				overflow: hidden;
+			}
+			.brains {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-image: url("img/brains.png");
+				animation: vertical-brains 20s linear infinite;
+			}
+
+			/** LOGO */
+			.logo-container {
+				position: absolute;
+				padding: 0px 10px;
+				z-index: 15;
+			}
+			.logo-image {
+				image-rendering: pixelated;
+				margin-top: 20px;
+				filter: sepia(40%) saturate(1480%) hue-rotate(2deg) brightness(102%)
+					contrast(106%);
+			}
+			.logo-text {
+				width: fit-content;
+				margin: 0;
+
+				color: var(--inspect-color);
+				text-shadow: rgb(123, 255, 0) 1px 0 10px;
+
+				font-family: "Consolas";
+				letter-spacing: 5px;
+				font-size: 1em;
+			}
+
+			/** DEMON */
+			#demon {
+				position: relative;
+				margin-top: var(--demon-top-offset);
+				margin-bottom: var(--demon-top-offset);
+
+				image-rendering: pixelated;
+				user-select: none;
+				z-index: var(--demon-z);
+
+				aspect-ratio: 527/894;
+			}
+			#demon-container {
+				height: fit-content;
+				width: fit-content;
+				position: relative;
+				margin: auto;
+			}
+			#demon-glow {
+				position: absolute;
+				top: calc(290px * var(--scale) + var(--demon-top-offset));
+				left: calc(263px * var(--scale));
+				width: calc(220px * var(--scale));
+				height: calc(230px * var(--scale));
+				transform: translate(-50%, -50%);
+
+				box-shadow: 0px 0px 500px greenyellow,
+					0px 0px 500px rgba(172, 255, 47, 0.5);
+				border-radius: 100%;
+			}
+
+			/** EMAIL */
+			#email-container {
+				position: absolute;
+				padding: calc(30px * var(--scale)) calc(10px * var(--scale));
+				top: calc(70px * var(--scale) + var(--demon-top-offset));
+				right: calc(-100px * var(--scale));
+
+				font-family: "Consolas";
+				font-size: calc(0.9em * var(--scale));
+				letter-spacing: 1px;
+
+				border-style: solid;
+				border-width: 1px;
+
+				border-radius: 100%;
+				box-sizing: border-box;
+				z-index: var(--email-z) !important;
+			}
+			#email {
+				width: fit-content;
+				margin: 0px auto;
+				padding: 10px 0;
+				position: relative;
+			}
+			#e-m-a,
+			#i-l {
+				display: none;
+			}
+
+			/** ENTER */
+			#enter-container {
+				position: absolute;
+
+				top: calc((312px * var(--scale)) + var(--demon-top-offset));
+				left: calc(263px * var(--scale));
+				transform: translate(
+					calc(-55px * var(--scale)),
+					calc(-55px * var(--scale))
+				);
+
+				color: white;
+				background-color: black;
+
+				border-color: rgb(255, 104, 187);
+				border-style: solid;
+				border-radius: 100%;
+				border-width: 1px;
+
+				width: calc(110px * var(--scale));
+				height: calc(110px * var(--scale));
+				box-sizing: border-box;
+
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+
+				transition: box-shadow 0.5s ease, background-color 0.5s ease,
+					color 0.5s ease, border-color 0.5s ease;
+
+				z-index: var(--enter-z);
+			}
+			#enter-container:hover {
+				box-shadow: 0px 0px 20px rgb(83, 255, 68);
+				border-color: green;
+				background-color: rgb(255, 255, 255);
+				color: black;
+			}
+			#top-enter-text,
+			#bottom-enter-text {
+				font-family: "Bodoni Ornaments ITC";
+				font-size: calc(0.6em * var(--scale));
+				margin: 0;
+				letter-spacing: 2px;
+			}
+			#enter-text {
+				font-family: "Silkscreen";
+				font-size: calc(1.2em * var(--scale));
+				margin-bottom: calc(5px * var(--scale));
+				margin-top: 0px;
+			}
+
+			/** LINKS */
+			.link {
+				background-color: black;
+				padding: calc(5px * var(--scale));
+				margin: 0;
+
+				font-size: calc(1em * var(--scale));
+				font-family: "Consolas";
+
+				display: flex;
+				gap: calc(5px * var(--scale));
+				align-items: center;
+
+				transition: background-color 0.2s, color 0.2s !important;
+				border-bottom-style: none;
+			}
+			.link-icon {
+				height: calc(1em * var(--scale));
+				width: calc(15px * var(--scale));
+
+				image-rendering: pixelated;
+				filter: invert(94%) sepia(40%) saturate(1480%) hue-rotate(2deg)
+					brightness(102%) contrast(106%);
+			}
+			.link-name {
+				margin: 0;
+				font-size: calc(1em * var(--scale));
+			}
+			.link:hover {
+				background-color: var(--inspect-color);
+				color: black;
+				transition: none !important;
+			}
+			.link:hover .link-icon {
+				filter: none;
+			}
+
+			/** LINKS PRIMARY */
+			#links-primary-container {
+				position: absolute;
+				top: calc(80px * var(--scale) + var(--demon-top-offset));
+				left: calc(-85px * var(--scale));
+			}
+			#links-primary-line {
+				width: calc(250px * var(--scale));
+				top: calc(200px * var(--scale));
+				left: calc(265px * var(--scale));
+				transform: rotate(220deg);
+			}
+
+			/** LINKS SECONDARY */
+			#links-secondary-container {
+				position: absolute;
+				top: calc(240px * var(--scale) + var(--demon-top-offset));
+				left: calc(-85px * var(--scale));
+			}
+			#links-secondary-line {
+				width: calc(250px * var(--scale));
+				top: calc(105px * var(--scale));
+				left: calc(255px * var(--scale));
+				transform: rotate(200deg);
+			}
+
+			/** LINKS TERTIARY */
+			#links-tertiary-container {
+				position: absolute;
+				top: calc(320px * var(--scale) + var(--demon-top-offset));
+				left: calc(-85px * var(--scale));
+			}
+			#links-tertiary-line {
+				width: calc(180px * var(--scale));
+				top: calc(120px * var(--scale));
+				left: calc(160px * var(--scale));
+				transform: rotate(210deg);
+			}
+
+			/* SUPPORT LINKS */
+			#support-links-container {
+				position: absolute;
+				top: calc(270px * var(--scale) + var(--demon-top-offset));
+				right: calc(-110px * var(--scale));
+				transform: translate(-50%, -50%);
+			}
+			#support-links-line {
+				width: calc(180px * var(--scale));
+				top: calc(100px * var(--scale));
+				right: calc(40px * var(--scale));
+				transform: rotate(-22deg);
+			}
+
+			/* INTERNAL LINKS */
+			#internal-links-container {
+				position: absolute;
+				top: calc(370px * var(--scale) + var(--demon-top-offset));
+				right: calc(-80px * var(--scale));
+				transform: translate(-50%, -50%);
+			}
+			#internal-links-line {
+				width: calc(150px * var(--scale));
+				top: calc(110px * var(--scale));
+				right: calc(-20px * var(--scale));
+				transform: rotate(-30deg);
+			}
+
+			/* OPTIONS CONTAINER (PLACEHOLDER UNTIL IMPLEMENTED) */
+			#options-container {
+				position: absolute;
+				top: calc(570px * var(--scale) + var(--demon-top-offset));
+				right: calc(-90px * var(--scale));
+				width: calc(100px * var(--scale));
+				height: calc(100px * var(--scale));
+
+				background-color: black;
+				border-style: solid;
+				border-width: 1px;
+				border-color: var(--inspect-color);
+				box-sizing: border-box;
+			}
+			#options-container p {
+				width: 100%;
+				height: 100%;
+				color: var(--inspect-color);
+				font-family: "Consolas";
+				overflow: hidden;
+				margin: 0;
+				font-size: calc(0.8em * var(--scale));
+				background-color: black;
+			}
+			#options-line {
+				width: calc(160px * var(--scale));
+				top: calc(115px * var(--scale));
+				right: calc(74px * var(--scale));
+				transform: rotate(-30deg);
+			}
+
+			/* RANDOM QUOTE */
+			#random-quote-container {
+				position: absolute;
+				font-family: "Consolas";
+				left: calc(-220px * var(--scale));
+				bottom: calc(155px * var(--scale) - var(--demon-top-offset));
+				background-color: black;
+				border-width: 1px;
+				border-style: solid;
+				border-color: var(--inspect-color);
+				border-radius: 100%;
+
+				width: calc(300px * var(--scale));
+				height: calc(200px * var(--scale));
+				padding: calc(50px * var(--scale));
+
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				font-style: italic;
+				animation-duration: 1.5s;
+				box-sizing: border-box;
+
+				z-index: var(--random-quote-z);
+			}
+			#random-quote {
+				margin: auto;
+				font-size: calc(0.8em * var(--scale));
+			}
+			#refresh-button {
+				position: absolute;
+				top: 80%;
+				left: 50%;
+				transform: translate(-50%, 0%);
+
+				background-color: transparent;
+				border-style: none;
+				filter: invert(10%) sepia(40%) saturate(1480%) hue-rotate(2deg)
+					brightness(102%) contrast(106%);
+			}
+			#refresh-button:hover {
+				cursor: url("img/cursor-point.png"), default;
+				opacity: 0.5;
+			}
+			#refresh-icon {
+				filter: invert();
+				height: calc(15px * var(--scale));
+			}
+
+			/** INSPECT STYLING */
+			.inspect-container {
+				z-index: var(--inspect-z);
+			}
+			.inspect-row {
+				color: var(--inspect-color);
+				background-color: black;
+
+				border-color: var(--inspect-color-subtle);
+				border-style: solid;
+				border-width: 1px;
+				border-bottom-style: none;
+
+				box-sizing: border-box;
+				position: relative;
+
+				z-index: var(--inspect-z);
+			}
+			.row-text {
+				font-family: "Consolas";
+				font-size: calc(1em * var(--scale));
+
+				width: fit-content;
+				margin: auto;
+				padding: calc(5px * var(--scale));
+			}
+
+			.circle-container {
+				background-image: url("img/texture-10.png");
+				color: var(--inspect-color);
+
+				animation: circle-animation 100s linear infinite,
+					floating 1s ease-in-out alternate infinite;
+				transition: box-shadow 0.1s ease;
+
+				box-shadow: 0px 5px 10px rgba(145, 255, 0, 0.5);
+				box-sizing: border-box;
+			}
+			.circle-container:hover {
+				box-shadow: 0px 5px 20px rgba(145, 255, 0, 1);
+			}
+
+			.line {
+				position: absolute;
+				transform-origin: 0% 0%;
+				height: 1px;
+
+				border-top-style: solid;
+				border-width: 1px;
+				border-color: var(--inspect-color);
+			}
+			.line-endpoint {
+				position: relative;
+				background-color: rgb(0, 0, 0);
+				width: calc(20px * var(--scale));
+				height: calc(20px * var(--scale));
+
+				border-color: var(--inspect-color);
+				border-style: solid;
+				border-width: 1px;
+				border-radius: 100%;
+
+				transform: translate(0%, -50%);
+				transition: box-shadow 0.1s linear, background-color 0.1s linear;
+			}
+			.inspect-container:hover .line-endpoint {
+				background-color: var(--inspect-color);
+				box-shadow: 0px 0px 5px var(--inspect-color);
+				transition: none !important;
+			}
+			.line:hover .line-endpoint {
+				background-color: black;
+				box-shadow: none;
+			}
+
+			/* SMALL SCREEN ADJUSTMENTS */
+			@media screen and (max-width: 1600px) {
+				.brains-glow {
+					transform: translate(0%, 0%);
+				}
+			}
+			@media screen and (max-width: 1300px) {
+				.brains-glow {
+					display: none;
+				}
+			}
+			@media screen and (max-width: 1200px) {
+				#main-container {
+					position: static;
+				}
+				.logo-container {
+					background: linear-gradient(
+						150deg,
+						rgba(0, 0, 0, 1) 0%,
+						rgba(255, 255, 255, 0) 50%,
+						rgba(255, 255, 255, 0) 100%
+					);
+				}
+			}
+			@media screen and (max-width: 1000px) {
+				#random-quote-container {
+					border-radius: 5%;
+					border-top-right-radius: 25%;
+					padding: calc(10px * var(--scale));
+					width: calc(160px * var(--scale));
+					height: calc(180px * var(--scale));
+					left: calc(-145px * var(--scale));
+					bottom: calc(155px * var(--scale) - var(--demon-top-offset));
+				}
+				#random-quote {
+					text-align: left;
+				}
+				#refresh-button {
+					top: 98%;
+					left: 98%;
+					transform: translate(-100%, -100%);
+				}
+			}
+			/** Not likely a situation that would ever occur naturally, but handling it soothes my wretched mind. */
+			@media screen and (max-height: 800px) {
+				.logo-container.bottom-right {
+					display: none;
+				}
+				#random-quote-container {
+					position: fixed;
+					left: 0%;
+					bottom: 0%;
+
+					height: 100px;
+					width: 90%;
+					padding: 0;
+
+					border-radius: 0%;
+					animation: none;
+					z-index: var(--fixed-z);
+				}
+				#refresh-button {
+					top: auto;
+					bottom: 5px;
+				}
+				#options-container {
+					position: fixed;
+					transform: none;
+					top: auto;
+					bottom: 0%;
+					right: 0%;
+					height: 100px;
+					width: 10%;
+				}
+				#options-line {
+					display: none;
+				}
+			}
+			@media screen and (max-width: 900px) {
+				/** BODY */
+				body {
+					overflow: auto;
+					height: fit-content;
+					position: relative;
+					background-attachment: fixed;
+				}
+				.small-screen-only {
+					display: block;
+				}
+				#plane-bottom {
+					display: none;
+				}
+
+				/** INSPECT STYLING */
+				.inspect-row {
+					width: 80%;
+					margin: auto;
+					padding-left: 5px;
+					border-bottom-style: solid !important;
+				}
+				.inspect-title {
+					padding-top: 10px;
+					width: 50%;
+					border-style: none !important;
+					background-color: transparent;
+				}
+				.inspect-title .row-text {
+					font-size: 1.2em;
+					text-transform: uppercase;
+				}
+				.line,
+				.line-endpoint {
+					display: none;
+				}
+
+				/** ORDER */
+				#links-primary-container {
+					order: 0;
+				}
+				#links-secondary-container {
+					order: 1;
+				}
+				#links-tertiary-container {
+					order: 2;
+				}
+				#support-links-container {
+					order: 3;
+				}
+				#internal-links-container {
+					order: 4;
+				}
+				#extra {
+					order: 5;
+				}
+
+				/** PLANES */
+				.plane-container {
+					z-index: -1;
+				}
+
+				/** CONTAINERS */
+				#full-container {
+					height: fit-content;
+				}
+				#main-container {
+					width: 100%;
+					height: fit-content;
+				}
+				#windows-container {
+					display: none;
+				}
+				#links-primary-container,
+				#links-secondary-container,
+				#links-tertiary-container,
+				#support-links-container,
+				#internal-links-container,
+				#email-container,
+				#random-quote-container,
+				#options-container {
+					position: relative;
+					transform: none;
+					box-sizing: border-box;
+					width: 100%;
+
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+				}
+
+				/** BRAINS */
+				.brains-container {
+					position: absolute;
+					width: var(--sm-brain-width);
+					height: 100%;
+					z-index: -1;
+				}
+				.brains-container.left {
+					left: 0%;
+				}
+				.brains-container.right {
+					right: 0%;
+				}
+
+				/** DEMON */
+				#demon-container {
+					margin: 0px auto;
+					width: calc(100%);
+
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+				}
+				#demon {
+					position: relative;
+					max-height: none;
+					width: var(--demon-image-width);
+					max-width: calc(100% - var(--sm-margin));
+					margin: calc(20px * var(--scale)) auto;
+					image-rendering: auto;
+				}
+				#demon-glow {
+					left: 50%;
+				}
+				#enter-container {
+					top: calc(250px * var(--scale) + calc(22px * var(--scale)));
+					left: 50%;
+					transform: translateX(-50%);
+					width: calc(120px * var(--scale));
+					height: calc(120px * var(--scale));
+				}
+				#enter-text {
+					font-size: calc(1.7em * var(--scale));
+				}
+
+				/** LINKS */
+				.link-icon {
+					height: 20px;
+					width: 20px;
+				}
+				.link-name {
+					font-size: 1.5em;
+				}
+				.link {
+					display: inline-flex;
+					gap: 8px;
+					width: 50%;
+					padding: 10px 10px;
+					margin: 5px auto;
+					border-radius: 10px;
+				}
+				#links {
+					position: relative;
+				}
+				#links-overlay {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					background-color: rgb(52, 129, 87);
+					mix-blend-mode: hard-light;
+				}
+				#links-primary-container {
+					margin-top: 20px;
+				}
+				#internal-links-container {
+					margin-bottom: 20px;
+				}
+
+				/** EXTRA */
+				#email-container {
+					padding: 5px 0px;
+
+					border-bottom-style: none;
+					border-radius: 0%;
+					box-shadow: none;
+
+					font-size: 1.05em;
+					animation: none;
+				}
+
+				#random-quote-container {
+					position: relative;
+					width: 100%;
+					height: 150px;
+					padding: 25px;
+
+					border-radius: 0%;
+					box-shadow: none;
+
+					animation: none;
+				}
+				#random-quote {
+					margin: 0;
+					font-size: 1.02em;
+					text-align: center;
+				}
+				#refresh-button {
+					top: initial;
+					left: initial;
+					bottom: 0%;
+					right: 0%;
+
+					padding: 0;
+					height: 20px;
+					transform: translate(-5px, -5px);
+				}
+				#refresh-icon {
+					height: 20px;
+				}
+				#options-container {
+					height: 1.2em;
+					text-wrap: nowrap;
+					border-style: none;
+				}
+				#options-container p {
+					background-color: black;
+					color: var(--inspect-color);
+					font-size: 1em;
+					padding-top: 2px;
+					opacity: 0.5;
+				}
+
+				/** LOGO */
+				.logo-container.top-left {
+					background: none;
+					transform-origin: 0% 0%;
+					transform: translateX(5px) translateY(calc(300%)) rotate(-90deg);
+					padding: 0;
+				}
+				.logo-container.bottom-right {
+					display: none;
+				}
+				.logo-image {
+					margin: 0;
+					width: calc(250px * var(--scale));
+				}
+				.logo-text {
+					margin-left: auto;
+					font-size: calc(1em * var(--scale));
+				}
+
+				/** SCROLL PROMPT */
+				#scroll-prompt {
+					z-index: 999;
+					position: sticky;
+					bottom: 0;
+
+					background-color: black;
+					color: var(--inspect-color);
+					border-style: solid;
+					border-width: 1px;
+
+					font-size: calc(1.5em * var(--scale));
+					font-family: "Consolas";
+				}
+				#scroll-prompt p {
+					color: var(--inspect-color);
+					padding: 10px 0px;
+					margin: 0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- PLANES -->
+		<div class="plane-container" id="plane-bottom">
+			<img src="img/loop-plane.gif" />
+		</div>
+		<div class="plane-container" id="plane-top">
+			<img src="img/loop-plane.gif" />
+		</div>
+		<!-- WINDOWS -->
+		<div id="windows-container">
+			<div class="mini-window"></div>
+			<div class="mini-window"></div>
+			<div class="mini-window"></div>
+			<div class="mini-window"></div>
+			<div class="mini-window"></div>
+			<div class="mini-window"></div>
+			<div class="mini-window"></div>
+			<div class="mini-window"></div>
+		</div>
+		<div id="full-container">
+			<div class="brains-container left">
+				<div class="brains-glow"></div>
+				<div class="brains"></div>
+			</div>
+			<div id="main-container">
+				<!-- LOGO -->
+				<div class="logo-container top-left">
+					<img class="logo-image" src="img/espimyte-logo.png" />
+					<p class="logo-text">ESPIMYTE</p>
+				</div>
+				<div class="logo-container bottom-right">
+					<img class="logo-image" src="img/espimyte-logo.png" />
+					<p class="logo-text">ESPIMYTE</p>
+				</div>
+				<div id="demon-container">
+					<!-- DEMON GLOW -->
+					<div id="demon-glow"></div>
+					<!-- DEMON AND ENTRANCE -->
+					<img id="demon" src="img/demon-machine.png" />
+					<a href="home.html">
+						<div id="enter-container">
+							<p id="top-enter-text">espy</p>
+							<p id="enter-text">ENTER</p>
+							<p id="bottom-enter-text">world</p>
+						</div>
+					</a>
+					<div id="extra">
+						<!-- EMAIL (TODO BOT PROTECTION)-->
+						<div
+							class="circle-container"
+							id="email-container"
+							style="z-index: 5"
+						>
+							<p id="email">
+								espi<span id="e-m-a">a3645778631892l</span>myte@gm<span id="i-l"
+									>y904378323124d</span
+								>ail.com
+							</p>
+						</div>
+						<!-- RANDOM QUOTE -->
+						<div class="circle-container" id="random-quote-container">
+							<p id="random-quote"></p>
+							<button id="refresh-button">
+								<img id="refresh-icon" src="svg/refresh.svg" />
+							</button>
+						</div>
+						<!-- OPTIONS -->
+						<div class="inspect-container" id="options-container">
+							<p>
+								01100011011011 11011011010110 10010110111001 10011101110011
+								01101111011011 11011011100010 00010010000100 001010
+							</p>
+							<div class="line" id="options-line">
+								<div class="line-endpoint"></div>
+							</div>
+						</div>
+					</div>
+					<!-- LINKS -->
+					<div class="small-screen-only" id="scroll-prompt">
+						<a href="index.html#links">
+							<p>▼ LINKS ▼</p>
+						</a>
+					</div>
+					<div id="links">
+						<div class="small-screen-only" id="links-overlay"></div>
+						<div class="inspect-container" id="links-primary-container">
+							<a href="https://bsky.app/profile/espimyte.com">
+								<div class="inspect-row link">
+									<img class="link-icon" src="svg/logo/bluesky.svg" />
+									<p class="link-name">bluesky</p>
+								</div>
+							</a>
+							<a href="https://sheezy.art/espimyte">
+								<div class="inspect-row link">
+									<img class="link-icon" src="svg/logo/sheezy-art.svg" />
+									<p class="link-name">sheezy.art</p>
+								</div>
+							</a>
+							<a href="https://espimyte.tumblr.com/">
+								<div class="inspect-row link">
+									<img class="link-icon" src="svg/logo/tumblr.svg" />
+									<p class="link-name">tumblr</p>
+								</div>
+							</a>
+							<a href="https://www.instagram.com/espimyte/">
+								<div class="inspect-row link">
+									<img class="link-icon" src="svg/logo/instagram.svg" />
+									<p class="link-name">instagram</p>
+								</div>
+							</a>
+							<a href="https://www.deviantart.com/espimyte">
+								<div
+									class="inspect-row link"
+									style="border-bottom-style: solid"
+								>
+									<img class="link-icon" src="svg/logo/deviantart.svg" />
+									<p class="link-name">deviantart</p>
+								</div>
+							</a>
+							<div class="line" id="links-primary-line">
+								<div class="line-endpoint"></div>
+							</div>
+						</div>
+						<div class="inspect-container" id="links-secondary-container">
+							<a href="https://espimyte.itch.io/">
+								<div class="inspect-row link">
+									<img class="link-icon" src="svg/logo/itch-io.svg" />
+									<p class="link-name">itch.io</p>
+								</div>
+							</a>
+							<a href="https://github.com/espimyte">
+								<div
+									class="inspect-row link"
+									style="border-bottom-style: solid"
+								>
+									<img class="link-icon" src="svg/logo/github.svg" />
+									<p class="link-name">github</p>
+								</div>
+							</a>
+							<div class="line" id="links-secondary-line">
+								<div class="line-endpoint"></div>
+							</div>
+						</div>
+						<div class="inspect-container" id="links-tertiary-container">
+							<a href="https://toyhou.se/espimyte/">
+								<div class="inspect-row link">
+									<img class="link-icon" src="svg/logo/toyhouse.svg" />
+									<p class="link-name">toyhouse</p>
+								</div>
+							</a>
+							<a href="https://artfight.net/~espimyte">
+								<div
+									class="inspect-row link"
+									style="border-bottom-style: solid"
+								>
+									<img class="link-icon" src="svg/logo/artfight.svg" />
+									<p class="link-name">artfight</p>
+								</div>
+							</a>
+							<div class="line" id="links-tertiary-line">
+								<div class="line-endpoint"></div>
+							</div>
+						</div>
+						<!-- SUPPORT LINKS -->
+						<div class="inspect-container" id="support-links-container">
+							<div class="inspect-row inspect-title">
+								<p class="row-text">support me!</p>
+							</div>
+							<a href="https://ko-fi.com/espimyte/">
+								<div class="inspect-row link">
+									<img class="link-icon" src="svg/logo/ko-fi.svg" />
+									<p class="link-name">ko-fi</p>
+								</div>
+							</a>
+							<a href="https://www.inprnt.com/gallery/espimyte/">
+								<div
+									class="inspect-row link"
+									style="border-bottom-style: solid"
+								>
+									<img class="link-icon" src="svg/logo/inprnt.svg" />
+									<p class="link-name">inprnt</p>
+								</div>
+							</a>
+							<div class="line" id="support-links-line">
+								<div class="line-endpoint"></div>
+							</div>
+						</div>
+						<!-- INTERNAL LINKS -->
+						<div class="inspect-container" id="internal-links-container">
+							<div class="inspect-row inspect-title small-screen-only">
+								<p class="row-text">feed</p>
+							</div>
+							<a href="log.html">
+								<div class="inspect-row link">
+									<img class="link-icon" src="svg/book-open.svg" />
+									<p class="link-name">log</p>
+								</div>
+							</a>
+							<a href="https://espimyte.com/feed.xml">
+								<div
+									class="inspect-row link"
+									style="border-bottom-style: solid"
+								>
+									<img class="link-icon" src="svg/rss.svg" />
+									<p class="link-name">RSS</p>
+								</div>
+							</a>
+							<div class="line" id="internal-links-line">
+								<div class="line-endpoint"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="brains-container right">
+				<div class="brains-glow"></div>
+				<div class="brains" style="animation-direction: reverse"></div>
+			</div>
+		</div>
+		<script>
+			// FUN SURPRISE
+			console.log(
+				"%cgreetings scrublord :>",
+				"background: black; color: #83ff45; padding: 15px; font-size: 2em; border: 1px solid; display:block;"
+			);
+
+			// RANDOM QUOTE GENERATION
+			var randomQuotes = [
+				"greetings scrublord! welcome to the frickin' site!",
+				"I am mad scientist! it's so cool! sunovabitch!",
+				"Do not, my friends, become affected by art. It will take hold of you, and you will resent its absence!",
+				"STAY SOFT. REFUSE 2 DIE.",
+				"I'm going to the north. Hope I get to see the lion.",
+				"ARE YOU A BEAST OR WHAT!?",
+				"in the world, there are many different kinds of people. I want to believe in a better future for everyone.",
+				"we gotta upgrade!",
+				"do something wrong. do something else that's wrong.",
+				"really? a wimp like me, that's the best you got?",
+				"I LIVE IN A DIMENSION WHERE SOMETIMES I KNOW LOTS OF THINGS ABOUT STUFF PEOPLE DON’T KNOW MUCH ABOUT AND SOMETIMES I KNOW NOTHING ABOUT SOMETHING PEOPLE KNOW A LOT ABOUT",
+				"mad scientist. psychic fiend. nefarious scrublord. chemical swag. ultimate fool. beloved beast. my condolences.",
+				"What are you doing? You haven't even done Phillian's gambit yet!",
+				"Don't be mad at me his shit was odd as hell.",
+				"this has gotten out of control! it's not your fault, it's mine. lets work together to find a solution.",
+				"if you forgot how to listen to them, it’s okay. in time, I’m sure you’ll be able to hear their voice again",
+				"my desires, once thought dead, were brought back to life.",
+				"they would drown in their overflowing power...or bury themselves alive with their own guilt",
+				"There is no one who can fool everybody.",
+				"I’ve got a lot of thoughts. it’s like popcorn in here.",
+				"Oh? You're calling riichi for a closed wait on the bamboo three?",
+				"got anymore fucked up wisdom for me?",
+				"you fool, that shit was the damn tutorial!",
+				"You describe yourself as an idiot. Well... I suppose I too aspire to be such an idiot.",
+				"Come and get it, punk!",
+				"what are we doing tonight? metamorphosis, thats whats up!",
+				"This morning you gave me a pink slip, employee of the month award, and a mother’s day card all at the same time.",
+				"Art for all my ideal diversions.",
+				"And now, the true test. Hold fast, or expire?",
+				"The next morning, [???] was so touched by his experience with the three computers, that he went to a shop and bought three HUNDRED computers.",
+				"What’s it gonna be, huh? Huh?",
+				"I like people who rotate.",
+				"shout out to bok choy",
+				"never should’ve smoked that shit now I’m in wet dry world",
+				"look at all this beautiful science!",
+				"andrew! andrew you screwed me! I thought we were childhood friends!",
+				"oh my god, he’s god",
+				"what the! that got guy’s got horns! that’s not normal. oh well, not gonna ruin my day.",
+				"Our manager can’t even do the funny bone exercise?",
+				"He was only human but yes, he was chicken and waffles.",
+				"Here we are at hostage situation!",
+				"He claims to be the ‘northern’ lion. Yet, he sits on the southern side of the board. Explain?",
+				"my nefarious domain. enter if you dare!",
+			];
+
+			var randomQuoteElement = document.getElementById("random-quote");
+
+			var generateRandomQuote = () => {
+				var randomIndex = Math.floor(Math.random() * randomQuotes.length);
+				randomQuoteElement.textContent = '"' + randomQuotes[randomIndex] + '"';
+			};
+			generateRandomQuote();
+
+			var refreshButton = document.getElementById("refresh-button");
+			refreshButton.onclick = () => {
+				generateRandomQuote();
+			};
+		</script>
+		<!-- SCALING SCRIPT -->
+		<script>
+			const rootTheme = document.querySelector(":root");
+			const demon = document.getElementById("demon");
+
+			const maxWidth = 527;
+			const maxHeight = 894;
+			const maxScale = 1;
+
+			var img = new Image();
+			img.onload = function () {
+				setScale();
+			};
+			img.src = "/img/demon-machine.png";
+
+			addEventListener("resize", (event) => {
+				setScale();
+			});
+
+			function setScale() {
+				const newWidthScale = Math.min(
+					1 * (demon.clientWidth / maxWidth),
+					maxScale
+				);
+				rootTheme.style.setProperty("--scale", newWidthScale);
+			}
+		</script>
+	</body>
+</html>

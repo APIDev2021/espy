@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="manifest.json" rel="manifest" />
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>station</title>
+		<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+		<style>
+			@keyframes animated-bg {
+				from {
+					background-position: 0 0;
+				}
+				to {
+					background-position: 2666px 0px;
+				}
+			}
+
+			body {
+				background-image: url("img/mountain.png");
+				animation: animated-bg 0s linear infinite;
+				background-blend-mode: hard-light;
+			}
+
+			.container {
+				width: 91vw;
+				max-width: 700px;
+				margin: auto;
+				padding-top: 10px;
+				padding-left: 20px;
+				padding-right: 20px;
+				border-style: solid;
+				border-image: url("img/texture-1.png") 30 stretch;
+				border-width: 5px;
+				background-image: url("img/none-texture.png");
+				box-sizing: border-box;
+			}
+
+			p {
+				font-family: "Silkscreen";
+				color: rgb(198, 233, 133);
+			}
+
+			p.code {
+				background-color: rgba(48, 48, 48, 0.795);
+				color: rgb(221, 226, 241);
+				border-width: 1px;
+				border-style: double;
+				border-color: rgb(82, 82, 82);
+				border-radius: 10px;
+				width: 90%;
+				max-width: 500px;
+				margin: auto;
+				padding: 10px;
+				position: relative;
+			}
+
+			.copy {
+				position: absolute;
+				top: 0;
+				right: 0;
+				background: transparent;
+				border: none;
+				margin: 5px;
+				opacity: 60%;
+			}
+
+			.copy:hover {
+				opacity: 50%;
+				cursor: pointer;
+			}
+
+			.buttonless {
+				width: 88px;
+				height: 31px;
+				object-fit: cover;
+				border: 1px solid rgb(107, 107, 107);
+				background-color: rgba(90, 90, 90, 0.192);
+				box-sizing: border-box;
+			}
+
+			.buttons-container {
+				padding: 0px 15px;
+				margin-bottom: 20px;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+
+			.buttons-container img,
+			.buttons-container a {
+				width: 88px;
+				height: 31px;
+			}
+
+			hr {
+				border-color: gray;
+				border-style: dashed;
+				border-top-style: none;
+			}
+			.note {
+				font-family: "Consolas";
+				color: rgb(165, 165, 165);
+				font-size: 0.9em;
+				margin: 20px 20px;
+			}
+
+			@media screen and (max-width: 600px) {
+				body {
+					margin: 0;
+				}
+				.container {
+					margin: 0;
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<a class="back-button" href="home.html">back</a>
+		<br />
+		<br />
+		<div class="container">
+			<p>[ MY BUTTON FOR YOU ]</p>
+			<a href="https://espimyte.com"
+				><img src="https://espimyte.com/img/button.gif"
+			/></a>
+			<br />
+			<br />
+			<p class="code">
+				<button class="copy" onclick="copyCode()">
+					<img class="copy" src="img/copy.png" />
+				</button>
+				<!-- prettier-ignore -->
+				<code id="button-code">&lt;a href="https://espimyte.com"&gt;&lt;img src="https://espimyte.com/img/button.gif"/&gt;&lt;/a&gt;</code>
+			</p>
+			<br />
+			<hr />
+			<p>[ OTHER WONDERFUL WORLDS ]</p>
+			<div class="buttons-container">
+				<!-- SLITHER (BUTTONLESS) -->
+				<a href="https://slitherbop.neocities.org/"
+					><img
+						class="buttonless"
+						src="station/slither.gif"
+						title="heheh...my beloved"
+				/></a>
+				<!-- SUNFISHED (BUTTONLESS) -->
+				<a href="https://sunfished.neocities.org/"
+					><img class="buttonless" src="station/sunfished.png"
+				/></a>
+				<!-- SHAYMOO (BUTTONLESS) -->
+				<a href="https://shaymoo.net/"
+					><img class="buttonless" src="station/shaymoo.gif"
+				/></a>
+				<!-- REIGA -->
+				<a href="https://reigazone.neocities.org/"
+					><img src="station/reigaworld.png"
+				/></a>
+				<!-- COOLGOTHZONE -->
+				<a href="https://coolgoth.zone" title="ＣＯＯＬ・ＧＯＴＨ・ＺＯＮＥ">
+					<img
+						alt="ＣＯＯＬ・ＧＯＴＨ・ＺＯＮＥ"
+						src="station/coolgothzone.gif"
+						style="image-rendering: pixelated"
+					/>
+				</a>
+				<!-- CORRU OBSERVER -->
+				<a href="https://corru.observer/"
+					><img src="station/corruobserver.gif"
+				/></a>
+				<!-- POCL V -->
+				<a href="https://pocl.vip/"
+					><img
+						alt="pocl.v button"
+						src="station/poclv.gif"
+						style="
+							-ms-interpolation-mode: nearest-neighbor;
+							image-rendering: -webkit-optimize-contrast;
+							image-rendering: -moz-crisp-edges;
+							image-rendering: -o-pixelated;
+							image-rendering: pixelated;
+							box-sizing: border-box;
+						"
+						title="he he hee its pockel vee"
+				/></a>
+				<!-- ASCALAPHID -->
+				<a href="https://espy.world/ascalaphid.com"><img src="station/ascalaphid.gif" /></a>
+				<!-- WARPZONE -->
+				<a href="https://warp.zone/">
+					<img src="station/warpzone.gif" />
+				</a>
+				<!-- HEAVENONLINE -->
+				<a href="https://heavenonline.xyz/">
+					<img src="station/heavenonline.png" />
+				</a>
+				<!-- SKELIZARD -->
+				<a href="https://skelizard.neocities.org">
+					<img src="station/skelizard.png" />
+				</a>
+				<!-- MELONKING -->
+				<a href="https://melonking.net/">
+					<img src="station/melonking.gif" />
+				</a>
+				<!-- PSSHAW -->
+				<a href="https://psshaw.neocities.org/"
+					><img src="station/pssshaw.png"
+				/></a>
+				<!-- MOOEENA -->
+				<a href="https://mooeena.site/">
+					<img src="station/mooeena.gif" />
+				</a>
+				<!-- DISPATCH FROM THE RADICAL DREAMLAND -->
+				<a href="https://blog.radicaldream.land"
+					><img src="station/dispatchfromtheradicaldreamland.gif"
+				/></a>
+			</div>
+			<hr />
+			<p class="note">
+				If you are here and do not wish to be, let me know! I can be contacted
+				via email.
+			</p>
+		</div>
+		<script>
+			function copyCode() {
+				var buttonCode = document.getElementById("button-code");
+				navigator.clipboard.writeText(buttonCode.textContent);
+				alert("Copied to clipboard!");
+			}
+		</script>
+	</body>
+</html>

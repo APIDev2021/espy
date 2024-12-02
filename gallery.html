@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="manifest.json" rel="manifest" />
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>gallery</title>
+		<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+		<style>
+			/* GALLERY WRAPPER */
+			#gallery-wrapper {
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+				overflow-y: hidden;
+			}
+
+			/* GALLERY CONTAINER */
+			#gallery-container {
+				flex-grow: 1;
+			}
+			#display {
+				height: 100%;
+				width: 100%;
+			}
+
+			/* GALLERY NAVBAR */
+			#gallery-navbar {
+				border-width: 1px;
+				border-style: solid;
+				border-color: rgb(12, 56, 47);
+				background-image: url("img/texture-4.png");
+				box-sizing: border-box;
+			}
+			.node-list {
+				display: flex;
+				width: calc(100% - 80px);
+				margin-left: auto;
+			}
+			.gallery-button-border {
+				flex: 1 1 0px;
+				border-color: rgb(35, 47, 155);
+				border-style: outset;
+				background-color: black;
+			}
+			.gallery-button {
+				background-image: url(img/kaleidoscope-1.jpg);
+				background-color: rgb(211, 136, 207);
+				background-blend-mode: multiply;
+				background-size: 600px;
+				color: rgb(209, 255, 42);
+				font-size: 1em;
+				font-family: "Silkscreen";
+				border-style: none;
+				width: 100%;
+				height: 2em;
+				transition: background-color 0.1s !important;
+			}
+			.gallery-button:disabled {
+				background-color: rgb(57, 94, 78);
+				color: rgb(145, 145, 145);
+			}
+			.gallery-button-name {
+				margin: 0;
+				padding: 0px 10px;
+			}
+
+			/* Class instead of attribute to prevent some buggy hovering. */
+			.gallery-button-hover {
+				background-color: rgb(17, 110, 75);
+				color: rgb(176, 233, 158);
+				transform: skewY(-3deg) translateY(-5px);
+				transition: none !important;
+			}
+
+			@media screen and (max-width: 700px) {
+				.node-list {
+					overflow-x: scroll;
+				}
+			}
+		</style>
+	</head>
+	<body style="margin: 0; height: 100dvh">
+		<a class="back-button" href="home.html" id="back-button">back</a>
+		<div id="gallery-wrapper">
+			<div id="gallery-navbar">
+				<div class="node-list" id="node-list"></div>
+			</div>
+			<div id="gallery-container">
+				<object data="gallery/illustration.html" id="display"></object>
+			</div>
+		</div>
+		<script>
+			class gallery {
+				constructor(link, id, name) {
+					this.link = link;
+					this.id = id;
+					this.name = name;
+				}
+			}
+
+			const display = document.getElementById("display");
+			const nodeList = document.getElementById("node-list");
+
+			// NAVBAR
+			const navbar = document.getElementById("gallery-navbar");
+			const backButton = document.getElementById("back-button");
+
+			// setup galleries
+			let current = 0;
+
+			const galleries = [];
+			galleries[0] = new gallery(
+				"/gallery/illustration.html",
+				"illustration",
+				"illustration"
+			);
+			galleries[1] = new gallery(
+				"/gallery/sequential.html",
+				"sequential",
+				"sequential"
+			);
+			galleries[2] = new gallery(
+				"/gallery/animation.html",
+				"animation",
+				"animation"
+			);
+			galleries[3] = new gallery("/gallery/scrap.html", "scrap", "scrap");
+			galleries[4] = new gallery("/gallery/ink.html", "ink", "ink");
+
+			for (let i = 0; i < galleries.length; i++) {
+				const gallery = galleries[i];
+				let buttonBorder = document.createElement("div");
+				buttonBorder.className = "gallery-button-border";
+
+				let button = document.createElement("button");
+				button.id = gallery.id;
+				button.className = "gallery-button";
+
+				let buttonName = document.createElement("p");
+				buttonName.textContent = gallery.name;
+				buttonName.className = "gallery-button-name";
+				button.appendChild(buttonName);
+
+				buttonBorder.appendChild(button);
+				nodeList.appendChild(buttonBorder);
+
+				buttonBorder.onclick = function (event) {
+					button.disabled = true;
+					button.className = "gallery-button";
+
+					let otherButton = document.getElementById(galleries[current].id);
+					otherButton.disabled = false;
+					current = i;
+					setGallery(current);
+				};
+
+				buttonBorder.onmouseover = function (event) {
+					if (!button.disabled) {
+						button.className = "gallery-button gallery-button-hover";
+					}
+				};
+
+				buttonBorder.onmouseleave = function (event) {
+					button.className = "gallery-button";
+				};
+			}
+
+			// get current entry
+			current = findGalleryById(getGalleryQuery());
+
+			if (!galleries[current]) {
+				current = 0;
+			}
+
+			setGallery(current);
+
+			function getGalleryQuery() {
+				var variable = "room";
+				var query = window.location.search.substring(1);
+				var vars = query.split("&");
+				for (var i = 0; i < vars.length; i++) {
+					var pair = vars[i].split("=");
+					if (pair[0] == variable) {
+						return pair[1];
+					}
+				}
+				return 0;
+			}
+
+			function setGallery(num) {
+				const toGallery = galleries[num] ?? galleries[0];
+				display.data = toGallery.link;
+				window.history.replaceState(
+					null,
+					document.title,
+					`/gallery.html?room=${toGallery.id}`
+				);
+				const toGalleryButton = document.getElementById(toGallery.id);
+				toGalleryButton.disabled = true;
+			}
+
+			function findGalleryById(id) {
+				return galleries.findIndex((gallery) => {
+					return gallery.id == id;
+				});
+			}
+
+			function isSmallScreen() {
+				return window.screen.width < 600;
+			}
+		</script>
+	</body>
+</html>

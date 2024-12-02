@@ -1,0 +1,349 @@
+@import url("https://fonts.googleapis.com/css?family=Silkscreen");
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
+@import url("https://fonts.googleapis.com/css?family=Libre+Barcode+39");
+@import url("https://fonts.googleapis.com/css?family=Eagle+Lake");
+@import url("https://fonts.googleapis.com/css?family=Cinzel");
+@import url("https://fonts.googleapis.com/css?family=Rock+Salt");
+@import url("https://fonts.googleapis.com/css?family=Nothing+You+Could+Do");
+
+@font-face { font-family: 'Bodoni Ornaments ITC'; src: url("fonts/Bodoni Ornaments ITC.ttf")}
+@font-face { font-family: 'Consolas'; src: url("fonts/consola.ttf")}
+@font-face { font-family: 'Consolas'; src: url("fonts/consolai.ttf"); font-style: italic}
+@font-face { font-family: 'Consolas'; src: url("fonts/consolab.ttf"); font-weight: bold}
+@font-face { font-family: 'Consolas'; src: url("fonts/consolaz.ttf"); font-style: italic; font-weight: bold}
+
+:root {
+  --dark-green:  rgb(19, 122, 24);
+  --dark-blue: rgb(0, 0, 161);
+  --light-switch-dark: rgb(104, 161, 133);
+  --lime-green: rgb(105, 255, 59);
+}
+
+@keyframes animated-background {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes animated-machine {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200px 200px;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  } to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes color-shift {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/** CURSOR */
+html, label, .link:hover {
+  cursor: url("img/cursor.png"), auto;
+}
+a, button, summary, input {
+  cursor: url("img/cursor-point.png"), default !important;
+}
+
+/** SCROLLBAR */
+* {
+  scrollbar-color: #4dac00 #004715;
+}
+
+html {
+  min-height: 100dvh;
+}
+
+body {
+  background-color: #000000;
+  color: #b9b9b9;
+  text-align: center;
+  font-family: "Consolas";
+}
+
+.vignette {
+  position: fixed;
+  height: 100dvh;
+  width: 100%;
+  box-shadow: inset 0px 0px 100px rgb(231, 31, 205);
+  mix-blend-mode: color-dodge;
+}
+
+@media (display-mode: standalone) {
+  body {
+    padding-bottom: 34px;
+  }
+}
+
+body.machine {
+  color: #b9b9b9;
+  text-align: center;
+  font-family: "Courier New";
+  background-image: url("img/machine-dark.png");
+  background-size: 200px;
+  animation: animated-machine 60s linear infinite;
+}
+
+body.rainbow-machine {
+  background-color: black;
+  background: linear-gradient(
+      to left,
+      rgb(116, 38, 108),
+      rgb(0, 94, 62),
+      rgb(106, 114, 0),
+      rgb(116, 38, 108)
+    ),
+    url("img/machine.png");
+  background-blend-mode: multiply;
+  background-size: 300px;
+}
+
+.bg-color {
+  width: 100vw; 
+  height: 100vh; 
+  position: absolute; 
+  z-index: -1; 
+  mix-blend-mode: overlay;
+  top: 0%;
+  left: 0%;
+}
+
+.center-box {
+  display: flex;
+}
+
+::selection {
+  color: rgb(162, 255, 134);
+  background: rgb(204, 54, 159);
+}
+
+/* currently not using due to flashing issues */
+.easeload {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+button {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+img {
+  margin: 0;
+}
+
+a, a:link {
+  color: #9e9b92;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #C7939F;
+}
+
+.transparent {
+  background-color: transparent;
+}
+
+a.back-button {
+  background-color: rgb(53, 53, 53) !important;
+  border-style: solid;
+  width: 60px;
+  margin: 0;
+  padding: 2px;
+  padding-left: 3px;
+  padding-right: 3px;
+  color: rgb(197, 189, 195) !important;
+  left: 0%;
+  top: 0%;
+  z-index: 100;
+  font-family: 'Courier New', Courier, monospace;
+  position: fixed;
+}
+
+a.back-button:hover {
+  background-color: rgb(110, 121, 110) !important;
+  color: rgb(218, 255, 118) !important;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  height: 20px;
+  width: 40px;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #667976;
+  background-image: url("img/kaleidoscope-1.jpg");
+  background-blend-mode: multiply;
+  border-radius: 20%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(137, 79, 184);
+  transition: 0.2s ease;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 15px;
+  left: 3px;
+  bottom: 3px;
+  background-color: rgb(119, 177, 124);
+  background-blend-mode: overlay;
+  border-radius: 20%;
+  transition: 0.2s ease;
+}
+
+input:checked + .slider {
+  background-color: #92f0cc;
+  border-color: rgb(230, 125, 212);
+}
+
+input:checked + .slider:before {
+  transform: translateX(17px) rotate(360deg);
+  background-color: rgb(190, 240, 206);
+}
+
+.light-switch {
+  position: relative;
+  display: inline-block;
+  height: 18px;
+  width: 40px;
+  transform: rotate(90deg);
+}
+
+.light-slider-bottom {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #9cc2b3;
+  background-image: url("img/kaleidoscope-1.jpg");
+  background-blend-mode: multiply;
+  border-style: outset;
+  border-width: 2.5px;
+  border-color: rgb(75, 73, 202);
+}
+
+.light-slider-bottom:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 17px;
+  left: 19px;
+  bottom: 2.5px;
+  background-color: #9cc2b3;
+  transform: skew(0, -10deg);
+}
+
+#toggle:checked ~ .light-slider-bottom {
+  background-color: #9cc2b3;
+}
+
+#toggle:checked ~ .light-slider-bottom:before {
+  transform: translate(0px, 2px) rotate(360deg) skew(0, 0deg);
+  background-color: var(--light-switch-dark);
+
+}
+
+.light-slider-top {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+}
+
+.light-slider-top:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 17px;
+  left: 2px;
+  bottom: 2.5px;
+  background-color: var(--light-switch-dark);
+  transform: skew(0, 0deg);
+}
+
+
+#toggle:checked ~ .light-slider-top:before {
+  transform: translate(0px, -2px) rotate(360deg) skew(0, 10deg);
+  background-color: #9cc2b3;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.small-screen-warning {
+  position: absolute;
+  background-color: black;
+  width: calc(100dvw - 40px);
+  height: 100dvh;
+  display: none;
+  font-family: "Silkscreen";
+  font-size: 1.5em;
+  padding: 0px 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  top: 0;
+  left: 0;
+}
+.small-screen-warning button {
+  font-family: "Silkscreen";
+  font-size: 1em;
+  width: 100px;
+  border-style: solid;
+  border-color: rgb(165, 165, 165);
+  background-color: rgb(104, 104, 104);
+  border-width: 1px;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .small-screen-warning {
+    display: flex;
+  }
+
+  a.back-button {
+    position: absolute;
+  }
+
+  body.rainbow-machine {
+    background: url("img/machine-dark.png");
+    background-size: 300px;
+  }
+}

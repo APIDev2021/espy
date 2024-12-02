@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="manifest.json" rel="manifest" />
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>guestbook</title>
+		<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+		<style>
+			@keyframes animated-bg {
+				from {
+					background-position: 0 0;
+				}
+				to {
+					background-position: -10px -20px;
+				}
+			}
+
+			body {
+				background-image: url("img/experiment.png");
+				animation-name: animated-bg;
+				animation-duration: 2s;
+				animation-iteration-count: infinite;
+				animation-timing-function: ease-in-out;
+				animation-direction: alternate;
+			}
+
+			.container {
+				max-width: 700px;
+				margin: auto;
+				border-style: double;
+				border-color: var(--dark-green);
+				padding: 20px;
+				margin-top: 20px;
+				background-color: rgba(0, 0, 0, 0.753);
+			}
+
+			h1 {
+				font-family: "Silkscreen";
+				margin: 0;
+				background: linear-gradient(
+					to left,
+					rgb(255, 123, 255),
+					rgb(228, 160, 255),
+					rgb(85, 230, 255),
+					rgb(62, 255, 126),
+					rgb(208, 255, 0)
+				);
+				max-width: fit-content;
+				margin: auto;
+				background-clip: text;
+				color: transparent;
+			}
+
+			hr {
+				border-style: dashed;
+				border-color: green;
+				border-top-style: none;
+			}
+
+			#c_inputDiv {
+				order: 1 !important;
+				margin: 0 !important;
+				border-style: none !important;
+				background-color: transparent !important;
+			}
+			#c_container {
+				order: 2 !important;
+			}
+			.c-input {
+				background-color: rgba(254, 255, 186, 0.24) !important;
+				color: white !important;
+			}
+			.c-input::placeholder {
+				opacity: 50% !important;
+			}
+			#c_commentsTitle {
+				display: none;
+			}
+
+			@media screen and (max-width: 600px) {
+				.container {
+					padding: 15px;
+				}
+				body {
+					margin: 0px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<a class="back-button" href="home.html">back</a>
+		<br />
+		<div class="container" id="container">
+			<h1>Guestbook</h1>
+			<hr />
+			<div id="c_widget"></div>
+			<script src="js/comment-widget.js"></script>
+		</div>
+	</body>
+</html>

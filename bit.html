@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" name="viewport"/>
+<link href="manifest.json" rel="manifest"/>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<meta charset="utf-8"/>
+<link href="style.css" media="all" rel="stylesheet" type="text/css"/>
+<style>
+			body {
+				background-image: url("img/texture-4.png");
+			}
+			p,
+			h1,
+			h2,
+			h3 {
+				text-align: left;
+			}
+			p {
+				font-size: 1.1em;
+				color: rgb(195, 207, 204);
+			}
+			h1 {
+				color: rgb(210, 255, 87);
+				font-size: 1.5em;
+			}
+			h2 {
+				color: rgb(235, 241, 144);
+				font-size: 1.3em;
+				margin-top: 40px;
+			}
+			em {
+				color: rgb(31, 238, 141);
+				font-style: normal;
+			}
+			em.word {
+				color: rgb(32, 166, 255);
+			}
+			em.extra {
+				color: rgb(114, 114, 179);
+			}
+			em.highlight {
+				color: yellow;
+			}
+			em.rainbow {
+				background: linear-gradient(
+					to left,
+					violet,
+					rgb(244, 227, 255),
+					rgb(147, 147, 255),
+					rgb(89, 255, 89),
+					yellow,
+					rgb(255, 192, 76),
+					rgb(255, 183, 249)
+				);
+				background-clip: text;
+				color: transparent;
+				font-weight: bold;
+			}
+			body {
+				margin: 40px;
+			}
+			img {
+				max-height: 400px;
+			}
+			img.zoom {
+				width: 150px;
+				height: 150px;
+				object-fit: none;
+				object-position: center;
+			}
+			.picture-grid {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1em;
+				justify-content: center;
+				margin-bottom: 20px;
+			}
+			.caption-picture {
+				display: flex;
+				flex-direction: column;
+				max-width: 45%;
+				gap: 0.5em;
+				color: rgb(221, 159, 44);
+			}
+			.container {
+				max-width: 950px;
+				margin: auto;
+				background-color: rgba(0, 0, 0, 0.452);
+				padding: 40px;
+				border-width: 3px;
+				border-style: double;
+				border-color: rgb(139, 113, 73);
+			}
+			table,
+			th,
+			td {
+				text-align: left;
+				border: 1px solid rgb(71, 71, 71);
+			}
+			td {
+				padding: 5px;
+				background-color: rgb(0, 0, 0);
+			}
+			th {
+				padding: 10px;
+				color: rgb(23, 206, 197);
+				background-color: rgb(26, 26, 46);
+			}
+
+			.note {
+				background-color: black;
+				padding: 10px 20px;
+				max-width: 950px;
+				margin: auto;
+				margin-bottom: 20px;
+				line-height: 2em;
+				font-family: "Inconsolata";
+				border-style: solid;
+				border-color: rgb(95, 95, 95);
+				border-width: 1px;
+				margin-top: 40px;
+			}
+
+			@media screen and (max-width: 600px) {
+				body {
+					margin: 0;
+				}
+				.container {
+					border-left-style: none;
+					border-right-style: none;
+					border-bottom-style: none;
+					padding: 20px;
+				}
+			}
+		</style>
+</head>
+<body>
+<a class="back-button" href="lab.html">back</a>
+<div class="container-wrapper">
+<div class="container">
+<h1>What are 32-bit, 16-bit, 8-bit, 4-bit, 2-bit, and 1-bit images?</h1>
+<h2>What is a bit?</h2>
+<p>
+					A <em class="word">bit</em> is the smallest unit of data that a
+					computer holds.
+				</p>
+<p>Computers are made of millions and millions of bits!</p>
+<p>
+					In most computers, bits are represented using
+					<em class="word">binary</em>.
+				</p>
+<p>
+					Binary in computers is a piece of data with two different states! In
+					the case with binary, these two different states are typically
+					represented as a <em>1</em> or a <em>0</em>.
+				</p>
+<p>
+					A single <em>bit</em> can be written as either a <em>1</em> or a
+					<em>0</em>.
+				</p>
+<br/>
+<p>Here's an example of an 8-bit value:</p>
+<p><em>01001011</em></p>
+<p>
+					Each bit is represented as either a <em>1</em> or a <em>0</em>. And
+					there are 8 of these bits.
+				</p>
+<p>Thus, this is an 8-bit value!</p>
+<br/>
+<p>
+					Bit values are used to represent data! The amount of data they can
+					represent corresponds to the amount of possible states a bit value can
+					have.
+				</p>
+<p>
+					A 1-bit value has two possible states, <em>1</em> or <em>0</em>. Thus,
+					a 1-bit value can store 2 pieces of data.
+				</p>
+<p>
+					A 2-bit value has four possible states, <em>00</em>, <em>01</em>,
+					<em>10</em>, and <em>11</em>. Thus, a 2-bit value can store 4 pieces
+					of data.
+				</p>
+<p>The amount of data that a bit value can store is as as follows:</p>
+<p>
+<em class="highlight">2<sup>n</sup></em>
+</p>
+<p>With <em class="highlight">n</em> being the number of bits.</p>
+<p>
+					For example, an 8-bit value can store 2<sup>8</sup> values (which is
+					256 values) for each pixel.
+				</p>
+<h2>What do bits have to do with images?</h2>
+<p>Each pixel in an image is represented by some number of bits.</p>
+<p>
+					An 8-bit image has each pixel represented by 8 bits, and a 4-bit image
+					has each pixel represented by 4 bits, and so on.
+				</p>
+<p>
+					For example, if we have an image with 4 pixels, and it is an 8-bit
+					image, we can think of those 4 pixels as being represented by 4 8-bit
+					values. Like so:
+				</p>
+<p><em>01001111</em></p>
+<p><em>01010101</em></p>
+<p><em>00011101</em></p>
+<p><em>11011101</em></p>
+<p>
+<em class="extra"><b>DISCLAIMER</b>: Images can often get more complex than this and
+						it is not always as simple as a 8-bit value or so representing a
+						single pixel, this is just a way to comprehend how bit values can
+						represent pixels.</em>
+</p>
+<p>
+					Images often have thousands of pixels, so there are often many many
+					many more bits! This is just an example for only 4 pixels!
+				</p>
+<p>
+					As you saw earlier, a single pixel can be represented using 8-bits,
+					but the pixels of an image can also be represented using 4-bits,
+					32-bits, or even 1-bit!
+				</p>
+<p>But what is this data that they are storing?</p>
+<p>It's <em class="rainbow">COLORS</em>!</p>
+<p>
+					An 8-bit value can store 256 colors, and a 4-bit value can store 16
+					colors, and so on!
+				</p>
+<p>
+					Here's a table to easily reference how many colors each bit value can
+					store.
+				</p>
+<table>
+<tr>
+<th>BIT VALUE</th>
+<th># OF COLORS</th>
+</tr>
+<tr>
+<td>32-bit</td>
+<td>4,294,967,296</td>
+</tr>
+<tr>
+<td>24-bit</td>
+<td>16,777,216</td>
+</tr>
+<tr>
+<td>16-bit</td>
+<td>65,536</td>
+</tr>
+<tr>
+<td>8-bit</td>
+<td>256</td>
+</tr>
+<tr>
+<td>4-bit</td>
+<td>16</td>
+</tr>
+<tr>
+<td>2-bit</td>
+<td>4</td>
+</tr>
+<tr>
+<td>1-bit</td>
+<td>2</td>
+</tr>
+</table>
+<h2>What can you do with this?</h2>
+<p>
+					Many images on the internet use 24-bit or higher images. Having
+					24-bits means there are a lot of possible colors for each pixel, but
+					it can take up a lot of space. Oftentimes, people might convert images
+					into lower bit values to save space. For example, converting a 16-bit
+					image to an 8-bit image.
+				</p>
+<p>
+					Of course, with less bits, there are less colors that can be
+					represented! As a result, there are less colors in the image.
+				</p>
+<p>This causes some very interesting effects!</p>
+<p>Let's take a look at this image.</p>
+<img src="img/bits/flowers-24.png"/>
+<p>This is a 24-bit image of some flowers!</p>
+<p>Let's convert it to 8-bit.</p>
+<img src="img/bits/flowers-8.png"/>
+<p>
+					These two images look very similar, but if you zoom in, you may notice
+					that there's a little bit of dithering!
+				</p>
+<img class="zoom" src="img/bits/flowers-24.png"/>
+<img class="zoom" src="img/bits/flowers-8.png"/>
+<p>
+					This is because as the number of colors decreases, dithering is used
+					to represent those lost colors using a more limited color palette.
+				</p>
+<p>Let's keep going.</p>
+<img src="img/bits/flowers-4.png"/>
+<p>
+					This is a 4-bit image! This means that each pixel can only have 2<sup>4</sup>
+					colors, or 32 colors! There is a much more noticeable difference in
+					the reduction of colors here. But we can keep going lower!
+				</p>
+<img src="img/bits/flowers-2.png"/>
+<p>This is a 2-bit image. Now there's only 4 colors in this image.</p>
+<img src="img/bits/flowers-1.png"/>
+<p>This is a 1-bit image. This one only has 2 colors!</p>
+<p>Let's look at all of them together!</p>
+<div class="picture-grid">
+<div class="caption-picture">
+<img src="img/bits/flowers-24.png"/>
+						24-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/flowers-8.png"/>
+						8-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/flowers-4.png"/>
+						4-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/flowers-2.png"/>
+						2-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/flowers-1.png"/>
+						1-bit
+					</div>
+</div>
+<p>
+					You can use different conversion methods to produce different results!
+					Here's examples with little to no dithering.
+				</p>
+<div class="picture-grid">
+<div class="caption-picture">
+<img src="img/bits/flowers-24.png"/>
+						24-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/flowers-8-nodither.png"/>
+						8-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/flowers-4-nodither.png"/>
+						4-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/flowers-2-nodither.png"/>
+						2-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/flowers-1-nodither.png"/>
+						1-bit
+					</div>
+</div>
+<p>
+					There are more complexities to digital images than this, but hopefully
+					this helps explain what it means when people talk about images being
+					8-bit, 24-bit, etc.!
+				</p>
+<p>Here's some more examples for fun!</p>
+<div class="picture-grid">
+<div class="caption-picture">
+<img src="img/bits/ephemeral-24.png"/>
+						24-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/ephemeral-4.png"/>
+						4-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/ephemeral-2.png"/>
+						2-bit
+					</div>
+</div>
+<div class="picture-grid">
+<div class="caption-picture">
+<img src="img/bits/espeon-24.png"/>
+						24-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/espeon-4.png"/>
+						4-bit
+					</div>
+</div>
+<div class="picture-grid">
+<div class="caption-picture">
+<img src="img/bits/butterfly-24.png"/>
+						24-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/butterfly-4.png"/>
+						4-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/butterfly-2.png"/>
+						2-bit
+					</div>
+</div>
+<div class="picture-grid">
+<div class="caption-picture">
+<img src="img/bits/blue-flowers-8.png"/>
+						24-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/blue-flowers-4.png"/>
+						4-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/blue-flowers-2.png"/>
+						2-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/blue-flowers-1.png"/>
+						1-bit
+					</div>
+</div>
+<div class="picture-grid">
+<div class="caption-picture">
+<img src="img/bits/skykid-24.png"/>
+						24-bit
+					</div>
+<div class="caption-picture">
+<img src="img/bits/skykid-4.png"/>
+						4-bit
+					</div>
+</div>
+<p>Do what you will with this information! Have fun!</p>
+<p>
+<em class="extra">Exporting the images with different bit values was done using
+						Paint.NET.</em>
+</p>
+</div>
+</div>
+</body>
+</html>

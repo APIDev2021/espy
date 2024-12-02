@@ -1,0 +1,86 @@
+.entry-date {
+    order: 1;
+    color: rgb(106, 214, 178);
+    font-size: 14px;
+}
+
+.entry-title {
+    order: 2;
+    color: var(--lime-green);
+    font-size: 15px;
+}
+
+.entry-tags {
+    order: 3;
+    display: flex;
+    gap: 5px;
+    letter-spacing: 1px;
+}
+
+.entry-tag {
+    background: rgba(36, 255, 36, 0.144);
+    padding: 2px 3px;
+    border-radius: 5px;
+    color: rgb(123, 209, 141);
+    font-size: 12px;
+}
+
+.entry-top-bar {
+    border-top-style: solid;
+    border-width: 2px;
+    border-color: green;
+}
+
+.entry-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex-direction: column;
+    width: 100%;
+    box-shadow: 3px 3px 30px rgb(20, 66, 35) inset;
+    padding: 10px 8px;
+    padding-bottom: 6px;
+    font-family: monospace;
+    box-sizing: border-box;
+}
+
+.entry-header:hover {
+    background-color: rgb(37, 37, 37);
+    box-shadow: 3px 3px 30px rgb(26, 134, 62) inset;
+}
+
+.entry {
+    text-align: left;
+    color: var(--lime-green);
+    width: 100%;
+}
+
+.entry:link {
+    color: var(--lime-green);
+}
+
+.entry:hover .entry-top-bar {
+    border-color: var(--lime-green);
+}
+
+.entries {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+a:hover,
+a.entry:hover {
+    color: yellow;
+}
+
+.entry:hover {
+    background-color: rgb(36, 44, 0);
+}
+
+@media screen and (max-width: 600px) {
+    .entry-header {
+        box-shadow: 3px 3px 50px rgb(2, 32, 4) inset;
+    }
+}

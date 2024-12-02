@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="manifest.json" rel="manifest" />
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>artifacts</title>
+		<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+		<link
+			href="style/artifacts.css"
+			media="all"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<link
+			href="style/honeycomb.css"
+			media="all"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<script
+			src="component/artifacts-display.js"
+			type="text/javascript"
+		></script>
+		<style>
+			.container {
+				max-width: 700px;
+				margin: auto;
+				border-style: double;
+				border-color: var(--dark-green);
+				padding: 20px;
+				margin-top: 20px;
+				background-color: rgba(0, 0, 0, 0.911);
+			}
+
+			.title {
+				margin-top: 0;
+				text-align: left;
+				color: var(--lime-green);
+				font-family: "Silkscreen";
+			}
+
+			hr {
+				color: green;
+				border-color: green;
+			}
+			#artifacts {
+				max-width: calc(100% - 20px);
+				margin: 20px auto;
+			}
+
+			@media screen and (max-width: 600px) {
+				body {
+					background: url("img/machine-dark.png");
+					background-size: 300px;
+					margin: 0px;
+				}
+				.container {
+					padding: 15px;
+				}
+
+				#artifacts {
+					max-width: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body class="rainbow-machine">
+		<a class="back-button" href="home.html">back</a>
+		<br />
+		<div class="container">
+			<h2 class="title">ARTIFACTS</h2>
+			<hr />
+			<artifacts-display></artifacts-display>
+			<hr />
+			<div id="artifacts-note">
+				<p>
+					Some sources are unknown.<br />If you know the source of anything
+					listed here without one, let me know!
+				</p>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="manifest.json" rel="manifest" />
+		<link href="favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>info</title>
+		<link href="style.css" media="all" rel="stylesheet" type="text/css" />
+		<style>
+			.container {
+				position: relative;
+				max-width: 700px;
+				margin: auto;
+				padding: 20px;
+				margin-top: 20px;
+				background-color: rgba(0, 0, 0, 0.781);
+				z-index: 10;
+				border-style: double;
+				border-color: var(--dark-green);
+			}
+
+			hr {
+				color: green;
+				border-color: green;
+			}
+
+			p {
+				width: fit-content;
+				color: var(--lime-green);
+				font-family: "Consolas";
+				font-size: 1em;
+				text-align: left;
+			}
+
+			.container a,
+			.container a:link {
+				color: yellow;
+				text-decoration: underline;
+			}
+			.container a:hover {
+				color: white;
+			}
+
+			.title {
+				margin-top: 0;
+				width: fit-content;
+				font-family: "Silkscreen";
+				text-align: left;
+				color: yellow;
+				z-index: 12;
+				width: 90%;
+			}
+			#version-display {
+				position: absolute;
+				top: 0%;
+				right: 0%;
+				margin: 1em;
+				color: yellow;
+			}
+
+			@media screen and (max-width: 600px) {
+				body {
+					background: url("img/machine-dark.png");
+					background-size: 300px;
+					margin: 0px;
+				}
+				.container {
+					padding: 15px;
+				}
+			}
+		</style>
+	</head>
+	<body class="rainbow-machine">
+		<a class="back-button" href="home.html">back</a>
+		<br />
+		<div class="container">
+			<h2 class="title">INFO</h2>
+
+			<p id="version-display">v.<span id="version"></span></p>
+
+			<p>
+				This is a site that I built and coded myself after growing tired of the
+				limitations of other site builders and wanting the ability to express
+				myself more.
+			</p>
+			<p>
+				Firefox is recommended for viewing this site. This site aims to be
+				mobile friendly.
+			</p>
+			<p>
+				If some parts of the site don't seem to be loading correctly, try
+				<b>CTRL+F5</b>.
+			</p>
+			<p>
+				Some parts of the site support comments. If you need a comment deleted,
+				please contact me.
+			</p>
+			<hr />
+			<br />
+			<h2 class="title">DEVELOPMENT</h2>
+
+			<p>Built with HTML, CSS, and JavaScript. Hosted on Neocities.</p>
+			<p>
+				Coded in Visual Studio Code. Tested on Firefox for Windows and Safari
+				for iPhone.
+			</p>
+			<p>Powered by a framework that I developed myself using Python.</p>
+
+			<p>
+				Updates are pushed/deployed through the framework using a combination of
+				git hooks and the Neocities CLI.
+			</p>
+			<hr />
+			<br />
+			<h2 class="title">CREDITS</h2>
+			<p>
+				Comments Widget -
+				<a href="https://virtualobserver.moe/">virtualobserver</a>
+			</p>
+			<p>
+				Textures -
+				<a href="https://melonking.net/melon?z=/frames/textures"
+					>MelonKing's Texture Town</a
+				>, <a href="https://www.deviantart.com/nocreditstock">nocreditstock</a>
+			</p>
+		</div>
+		<script>
+			const getManifest = async () => {
+				const res = await fetch("/manifest.json");
+				const data = await res.json();
+				return data;
+			};
+
+			var versionElement = document.getElementById("version");
+			let manifestPromise = getManifest();
+			manifestPromise.then((manifest) => {
+				versionElement.textContent = manifest.version;
+			});
+		</script>
+	</body>
+</html>
