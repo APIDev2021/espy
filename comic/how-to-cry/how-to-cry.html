@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" name="viewport"/>
+<link href="../favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="../manifest.json" rel="manifest"/>
+<meta charset="utf-8"/>
+<title>how to cry</title>
+<link href="../style.css" media="all" rel="stylesheet" type="text/css"/>
+<link href="../style/comic.css" media="all" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div style="margin: auto">
+<div class="comic-return-top">
+<a href="/comics.html">return to comics</a>
+</div>
+<br/>
+<div id="pages" style="display: flex; flex-direction: column; align-items: center"></div>
+<br/>
+<div class="comic-return-bottom">
+<a href="/comics.html">return to comics</a>
+</div>
+</div>
+<script>
+			const pages = document.getElementById("pages");
+			const length = 4;
+
+			for (let i = 1; i < length + 1; i++) {
+				const img = document.createElement("img");
+				img.className = "comic-page";
+				img.src = "/comic/how-to-cry/page/" + i + ".png";
+				pages.appendChild(img);
+			}
+		</script>
+</body>
+</html>
