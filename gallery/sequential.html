@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="../manifest.json" rel="manifest" />
+		<link href="../favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>sequential</title>
+		<link href="../style.css" media="all" rel="stylesheet" type="text/css" />
+		<style>
+			/* BASE STYLING */
+			hr {
+				width: 100%;
+				border-width: 1px;
+				border-style: dashed;
+				border-top-style: none;
+				border-color: green;
+				margin-top: 0px;
+				margin-bottom: 0px;
+			}
+			html {
+				overflow-x: hidden;
+				scroll-behavior: smooth;
+			}
+			body {
+				position: relative;
+				overflow-x: hidden;
+			}
+
+			/* SEQUENTIAL STYLING */
+			.sequential {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-content: center;
+				width: fit-content;
+				margin: auto;
+				gap: 1em;
+			}
+			.content {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1em;
+				justify-content: center;
+			}
+			.content img {
+				image-rendering: pixelated;
+				max-width: 100%;
+			}
+			.info {
+				display: flex;
+				flex-direction: column;
+				gap: 5px;
+			}
+			.title {
+				font-family: "Silkscreen";
+				font-size: 2em;
+				margin: 0 auto;
+				background: linear-gradient(
+					to left,
+					rgb(86, 235, 255),
+					rgb(89, 255, 89),
+					rgb(247, 255, 142)
+				);
+				width: fit-content;
+				background-clip: text;
+				color: transparent;
+				padding: 0px 10px;
+			}
+			.date {
+				font-family: "Consolas";
+				font-weight: normal;
+				font-size: 1em;
+				margin: 0;
+				color: yellowgreen;
+			}
+
+			/* ART SPECIFIC STYLING*/
+			.can {
+				width: 800px;
+			}
+			.peekaboo {
+				min-width: 300px;
+				object-fit: cover;
+			}
+			.seek {
+				object-fit: cover;
+			}
+			.bad-person {
+				max-height: 1300px;
+			}
+
+			/* GRID STYLING */
+			.display-grid {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				width: 95%;
+				margin: auto;
+				gap: 30px;
+			}
+
+			/* SCROLL TO TOP */
+			#top-scroll {
+				position: fixed;
+				bottom: 0%;
+				right: 0%;
+				background: black;
+				border-style: solid;
+				border-width: 1px;
+				border-color: yellow;
+			}
+			#top-scroll p {
+				font-family: "Inconsolata";
+				color: yellow;
+				margin: 0;
+				padding: 5px;
+			}
+			#top-scroll:hover {
+				background-color: yellow;
+			}
+			#top-scroll:hover p {
+				color: black;
+			}
+
+			/* SMALL SCREEN STYLING */
+			@media screen and (max-width: 600px) {
+				body {
+					margin: 0;
+				}
+				.display-grid {
+					width: 100%;
+				}
+				img {
+					max-width: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body class="machine" style="overflow-x: hidden">
+		<br />
+		<a href="javascript: window.scrollTo(0, 0)">
+			<div id="top-scroll" style="display: none">
+				<p>SCROLL TO TOP</p>
+			</div>
+		</a>
+		<div class="display-grid">
+			<!-- BAD PERSON -->
+			<div class="sequential">
+				<div class="content">
+					<img class="bad-person" src="../art/2023/bad-person.png" />
+				</div>
+				<div class="info">
+					<h1 class="title">Bad Person</h1>
+					<h2 class="date">12/19/2023</h2>
+				</div>
+			</div>
+			<hr />
+
+			<!-- SEEK -->
+			<div class="sequential">
+				<div class="content">
+					<img class="seek" src="../art/2023/seek-1.jpg" />
+					<img class="seek" src="../art/2023/seek-2.jpg" />
+				</div>
+				<div class="info">
+					<h1 class="title">Seek</h1>
+					<h2 class="date">10/20/2023</h2>
+				</div>
+			</div>
+			<hr />
+
+			<!-- RUBBER DUCKS -->
+			<div class="sequential">
+				<div class="content">
+					<img src="../art/2022/rubber-ducks.jpg" />
+				</div>
+				<div class="info">
+					<h1 class="title">Rubber Ducks</h1>
+					<h2 class="date">03/17/2022</h2>
+				</div>
+			</div>
+			<hr />
+
+			<!-- CAN -->
+			<div class="sequential">
+				<div class="content">
+					<img class="can" src="../art/2020/can-1.png" />
+					<img class="can" src="../art/2020/can-2.png" />
+				</div>
+				<div class="info">
+					<h1 class="title">Can</h1>
+					<h2 class="date">07/04/2020</h2>
+				</div>
+			</div>
+			<hr />
+
+			<!-- LAUGHTER -->
+			<div class="sequential">
+				<div class="content">
+					<img src="../art/2020/laughter.jpg" />
+				</div>
+				<div class="info">
+					<h1 class="title">Laughter</h1>
+					<h2 class="date">06/27/2020</h2>
+				</div>
+			</div>
+			<hr />
+
+			<!-- TEACHING -->
+			<div class="sequential">
+				<div class="content">
+					<img src="../art/2020/teaching.jpg" />
+				</div>
+				<div class="info">
+					<h1 class="title">Teaching</h1>
+					<h2 class="date">06/20/2020</h2>
+				</div>
+			</div>
+			<hr />
+
+			<!-- PAT -->
+			<div class="sequential">
+				<div class="content">
+					<img src="../art/2020/pat.jpg" />
+				</div>
+				<div class="info">
+					<h1 class="title">PAT</h1>
+					<h2 class="date">04/28/2020</h2>
+				</div>
+			</div>
+			<hr />
+
+			<!-- LAST EVENING -->
+			<div class="sequential">
+				<div class="content">
+					<img src="../art/2020/last-evening.jpg" />
+				</div>
+				<div class="info">
+					<h1 class="title">Last Evening</h1>
+					<h2 class="date">03/27/2020</h2>
+				</div>
+			</div>
+			<hr />
+
+			<!-- PEEKABOO -->
+			<div class="sequential">
+				<div class="content">
+					<img class="peekaboo" src="../art/2019/peekaboo-1.png" />
+					<img class="peekaboo" src="../art/2019/peekaboo-2.png" />
+				</div>
+				<div class="info">
+					<h1 class="title">PEEKABOO</h1>
+					<h2 class="date">12/03/2019</h2>
+				</div>
+			</div>
+			<hr />
+
+			<!-- IZZY AND AUDRI IN SPACE -->
+			<div class="sequential">
+				<div class="content">
+					<img src="../art/2018/space.jpg" />
+				</div>
+				<div class="info">
+					<h1 class="title">Izzy and Audri in Space</h1>
+					<h2 class="date">04/04/2018</h2>
+				</div>
+			</div>
+			<hr />
+
+			<!-- STUFFY OLD ROOM -->
+			<div class="sequential">
+				<div class="content">
+					<img src="../art/2018/stuffy-old-room.jpg" />
+				</div>
+				<div class="info">
+					<h1 class="title">Stuffy Old Room</h1>
+					<h2 class="date">04/03/2018</h2>
+				</div>
+			</div>
+		</div>
+		<br />
+		<script>
+			var topScroll = document.getElementById("top-scroll");
+
+			addEventListener("scroll", (event) => {
+				if (window.scrollY > 0) {
+					topScroll.style.display = "block";
+				} else {
+					topScroll.style.display = "none";
+				}
+			});
+		</script>
+	</body>
+</html>

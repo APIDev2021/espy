@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="../manifest.json" rel="manifest" />
+		<link href="../favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>illustration</title>
+		<link href="../style.css" media="all" rel="stylesheet" type="text/css" />
+		<script src="../component/modal-core.js" type="text/javascript"></script>
+		<link
+			href="../style/modal.css"
+			media="all"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<style>
+			body {
+				margin: 0;
+			}
+			.dynamic-grid-row {
+				justify-content: center;
+			}
+			.dynamic-grid-image {
+				height: calc(100% - 10px);
+				width: calc(100% - 10px);
+			}
+
+			@media screen and (max-width: 600px) {
+				body {
+					margin: 0;
+				}
+				.dynamic-grid-image {
+					height: calc(100% - 10px);
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body class="machine">
+		<br />
+		<div class="display-grid" id="grid"></div>
+		<br />
+		<modal-core id="modal-core"></modal-core>
+		<script src="../js/modal.js"></script>
+		<script src="../js/mindspace-util.js"></script>
+		<script>
+			/** CONSTANTS */
+			const SIZE_GOAL = 465;
+			const SMALL_SIZE_GOAL = Infinity;
+
+			let artPromise = getArtData();
+			artPromise.then((data) => {
+				var sources = [];
+
+				const art = data.art.sort((a, b) => {
+					return new Date(b.date) > new Date(a.date);
+				});
+
+				for (let entry of art) {
+					if (entry.category == "scrap") {
+						sources.push({ img: entry.src });
+					}
+				}
+
+				const modalHandler = new Modal({
+					modalCore: document.getElementById("modal-core"),
+					gridElement: document.getElementById("grid"),
+					sources: sources,
+				});
+
+				modalHandler.initializeWithDynamicGrid(SIZE_GOAL, SMALL_SIZE_GOAL);
+			});
+		</script>
+	</body>
+</html>

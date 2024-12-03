@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=contain"
+			name="viewport"
+		/>
+
+		<link href="../manifest.json" rel="manifest" />
+		<link href="../favicon.ico" rel="icon" type="image/x-icon" />
+		<meta charset="utf-8" />
+		<title>ink</title>
+		<link href="../style.css" media="all" rel="stylesheet" type="text/css" />
+		<style>
+			body {
+				overflow-x: hidden;
+				margin: 0;
+				min-height: 100vh;
+				display: flex;
+				padding: 0px 20px;
+			}
+			.inktober-display {
+				display: flex;
+				gap: 2em;
+				flex-wrap: wrap;
+				width: 100%;
+				height: 100%;
+				margin: auto;
+				image-rendering: pixelated;
+				justify-content: center;
+			}
+
+			/** INK WRAPPER */
+			.ink-wrapper {
+				display: flex;
+				flex-direction: column;
+				gap: 1em;
+				width: fit-content;
+			}
+
+			/** INK DISPLAY */
+			.ink-display {
+				position: relative;
+				width: 480px;
+				height: 380px;
+				border-style: solid;
+				border-image: url("../img/texture-1.png") 1 stretch;
+				box-sizing: border-box;
+				background-image: url("../img/texture-5.png");
+			}
+			.ink-shadow {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				box-shadow: inset 10px 10px 10px rgba(0, 0, 0, 0.5);
+				z-index: 20000;
+			}
+			.ink-cover {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				z-index: 5;
+				margin: 0;
+				vertical-align: middle;
+			}
+			.ink-title {
+				background-color: black;
+				color: rgb(236, 234, 103);
+				position: absolute;
+				left: 50%;
+				bottom: 20px;
+				transform: translatex(-50%);
+				margin: 0;
+				padding: 2px 5px;
+				z-index: 10;
+			}
+			.ink-title h3 {
+				margin: 0;
+			}
+			.ink-display:hover {
+				transform: rotate(2deg);
+			}
+			.ink-display:hover .ink-title {
+				background-color: yellow;
+				color: black;
+			}
+			.ink-display:hover .ink-cover {
+				mix-blend-mode: difference;
+			}
+
+			@media screen and (max-width: 600px) {
+				body {
+					margin: 0;
+					padding: 20px 0px;
+				}
+				.inktober-display {
+					width: 100%;
+					flex-direction: column;
+				}
+				.ink-display {
+					width: 100%;
+					height: auto;
+				}
+			}
+		</style>
+	</head>
+	<body class="machine">
+		<div class="inktober-display" id="inktober-display"></div>
+		<script>
+			const inktoberDisplay = document.getElementById("inktober-display");
+
+			let years = [2017, 2018, 2019];
+			years = years.sort((a, b) => {
+				return b < a ? -1 : 1;
+			});
+
+			for (let year of years) {
+				const html = `      
+					<a href='https://espy.world/inktober/${year}.html'>
+						<div
+							class="ink-display"
+						>
+							<div class="ink-shadow"></div>
+							<img class="ink-cover" src="https://espy.world/inktober/${year}/cover.jpg"/>
+							<div class="ink-title">
+							<h3>inktober ${year}</h3>
+							</div>
+						</div>
+					</a>
+				`;
+				const entry = document.createElement("div");
+				entry.className = "ink-wrapper";
+				entry.innerHTML = html;
+				inktoberDisplay.appendChild(entry);
+			}
+		</script>
+	</body>
+</html>
