@@ -1,0 +1,800 @@
+{
+    "characters": {
+        "merse": {
+            "name": "Mers\u00e9",
+            "icon": "/character/icon/merse.png",
+            "link": "character/Mers%C3%A9.html",
+            "world": "worldcocoon",
+            "stats": {
+                "prns": "they/them",
+                "bday": "01/26",
+                "affinity": "Poison"
+            },
+            "desc": "<p>[THE WILL TO KEEP FIGHTING]</p><p><i>\"I refuse to die.\"</i></p><p>[STAY SHARP]</p><p><i>\"I'm stronger than before.\"</i></p><p>An engineer on a quest for inner peace. It is very difficult and taking a very long time and they are very frustrated.</p><p><a href=\"https://www.youtube.com/watch?v=rFcHA-45UhI\">The Symposium - Poison</a></p>",
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/9871814.merse"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "Walk",
+                    "src": "/comic/walk.html"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "Free Shirt",
+                    "src": "/comic/free-shirt.html"
+                }
+            ],
+            "card": {
+                "illuscredit": "Slitherbop",
+                "types": [
+                    "willpower",
+                    "sharp"
+                ]
+            },
+            "layer": "primary"
+        },
+        "none": {
+            "name": "None",
+            "icon": "/character/icon/none.png",
+            "link": "character/None.html",
+            "world": "worldcocoon",
+            "stats": {
+                "prns": "he/him",
+                "bday": "09/25",
+                "affinity": "Presence"
+            },
+            "desc": "<p>[THE ESSENCE OF SURRENDER]</p><p><i>\"Come closer. Take and surround me.\"</i></p><p>[STAY SOFT]</p><p><i>\"Keep your heart open.\"</i></p><p>Quantum entity in orbit. An avid collector of dust.</p><p><a href='https://www.youtube.com/watch?v=CZ7WXDMldMs'>Dan Warren - Come Closer</a></p>",
+            "card": {
+                "illuscredit": "Slitherbop",
+                "types": [
+                    "surrender",
+                    "soft"
+                ]
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/10127202.none"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "Walk",
+                    "src": "/comic/walk.html"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "Haircut",
+                    "src": "/comic/haircut.html"
+                }
+            ],
+            "layer": "primary"
+        },
+        "prime": {
+            "name": "Prime",
+            "icon": "/character/icon/prime.png",
+            "world": "worldcocoon",
+            "link": "character/Prime.html",
+            "desc": "<p>Real name is actually Prim\u00e9, but they don't like to be called that because they think that's 'stupid'.</p><p>When told that the name Prime by itself was already quite stupid, they responded by saying 'YOU'RE STUPID!' and proceeded to punch the other person.</p><p>They were punching everyone.</p><p>They had to be removed from the theater.</p>",
+            "card": {
+                "illuscredit": "Slitherbop",
+                "types": [
+                    "consume",
+                    "sharp"
+                ]
+            },
+            "stats": {
+                "prns": "he/they"
+            },
+            "layer": "secondary"
+        },
+        "izzy": {
+            "name": "Izzy",
+            "icon": "/character/icon/izzy.png",
+            "link": "character/Izzy.html",
+            "world": "halfside",
+            "stats": {
+                "prns": "he/it",
+                "bday": "07/16"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "hearthaver",
+                    "biological"
+                ]
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/9865305.izzy"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "How to Breathe",
+                    "src": "/comic/how-to-breathe.html"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "How to Cry",
+                    "src": "/comic/how-to-cry.html"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "Fabric Tongue",
+                    "src": "/comic/fabric-tongue.html"
+                },
+                {
+                    "label": "FANDUB",
+                    "title": "Fabric Tongues",
+                    "src": "https://www.youtube.com/watch?v=Cn1Ev7JVzd4"
+                }
+            ],
+            "desc": "<p>An aquatic based lifeform.</p><p>Easily frightened.</p><p>Seeking shelter.</p><p>Likes the taste of medicine.</p>",
+            "layer": "primary"
+        },
+        "quo": {
+            "name": "Quo",
+            "icon": "/character/icon/quo.png",
+            "world": "worldcocoon",
+            "link": "character/Quo.html",
+            "desc": "<p>Lives in a secret base.<p>They try their best to have fun and enjoy life.</p><p>They're not often home, usually spending their time with <a href=\"/character/Vide.html\">Vide</a> and other friends.</p>",
+            "stats": {
+                "prns": "they/them"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "willpower",
+                    "soft"
+                ]
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/10119908.quo"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "Thief",
+                    "src": "/comic/thief.html"
+                }
+            ],
+            "layer": "secondary"
+        },
+        "vide": {
+            "name": "Vide",
+            "icon": "/character/icon/vide.png",
+            "world": "worldcocoon",
+            "link": "character/Vide.html",
+            "desc": "<p>Lives in a secret base.</p><p>She says she's the boss of the fort, but that's not true.</p><p>No one's the boss.</p><p>Her friends humor this claim anyways.</p>",
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "willpower",
+                    "sharp"
+                ]
+            },
+            "stats": {
+                "prns": "she/her"
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/3672502.vide"
+                }
+            ],
+            "layer": "secondary"
+        },
+        "deri": {
+            "name": "Deri",
+            "icon": "/character/icon/deri.png",
+            "world": "worldcocoon",
+            "link": "character/Deri.html",
+            "desc": "<p>Lives alone.</p><p>Her friends seem like they're having a lot of fun, but she doesn't feel like she fits in.</p><p>Something feels off.</p><p><i>\"I'm just being silly! Give it some time and I won't feel this way anymore.\"</i></p><p>She waits, and waits, and waits.</p>",
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "surrender",
+                    "soft"
+                ]
+            },
+            "stats": {
+                "prns": "she/her"
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/3671093.deri"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "Thief",
+                    "src": "/comic/thief.html"
+                }
+            ],
+            "layer": "secondary"
+        },
+        "di": {
+            "name": "Di",
+            "icon": "/character/icon/di.png",
+            "world": "worldcocoon",
+            "link": "character/Di.html",
+            "desc": "<p>Wanders the world with no goal.</p><p>She sleeps and she eats and she wanders and so on.</p><p>In her spare time (which she has plenty of), she practices her conjuring.</p><p>She has a lot of thoughts.</p><p>She mostly does the same thing everyday, her only variety in her life at current being her location.</p>",
+            "stats": {
+                "prns": "she/her"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "surrender",
+                    "soft"
+                ]
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/4739325.di"
+                }
+            ],
+            "layer": "secondary"
+        },
+        "operator": {
+            "name": "Operator",
+            "icon": "/character/icon/operator.png",
+            "world": "worldcocoon",
+            "link": "character/Operator.html",
+            "desc": "<p>Likes to play cruel games.</p><p>Mostly to Mers\u00e9.</p><p>She has been quite bored ever since Mers\u00e9 embarked on their quest.</p>",
+            "stats": {
+                "prns": "she/they"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "consume",
+                    "needle"
+                ]
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/16936276.operator"
+                }
+            ],
+            "layer": "secondary"
+        },
+        "huz": {
+            "name": "Huz",
+            "icon": "/character/icon/huz.png",
+            "world": "worldcocoon",
+            "link": "character/Huz.html",
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "surrender",
+                    "sharp"
+                ]
+            },
+            "desc": "<p>Lives in a secret base.</p><p>She and Mers\u00e9 used to hang out sometimes.</p><p>She hears a lot of people's problems.</p><p>I wonder what kind of problems she has?</p><p>Has a bitter and pessimistic view of the world.</p>",
+            "stats": {
+                "prns": "she/her"
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/16936461.huz"
+                }
+            ],
+            "layer": "secondary"
+        },
+        "abacus": {
+            "name": "Abacus",
+            "icon": "/character/icon/abacus.png",
+            "world": "worldcocoon",
+            "link": "character/Abacus.html",
+            "stats": {
+                "prns": "he/they"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "surrender",
+                    "needle"
+                ]
+            },
+            "desc": "<p>Created something important.</p><p>So important, in fact, that terrible things would happen if it were to fall into the wrong hands.</p><p>They don't know where that important thing is at the moment.</p><p>They don't seem concerned.</p>",
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/11697287.abacus"
+                }
+            ],
+            "layer": "secondary"
+        },
+        "m": {
+            "name": "M",
+            "icon": "/character/icon/m.png",
+            "world": "halfside",
+            "link": "character/M.html",
+            "stats": {
+                "prns": "he/him",
+                "bday": "11/11"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "heartless",
+                    "biological"
+                ]
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/11938744.m"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "How to Breathe",
+                    "src": "/comic/how-to-breathe.html"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "How to Cry",
+                    "src": "/comic/how-to-cry.html"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "Fabric Tongue",
+                    "src": "/comic/fabric-tongue.html"
+                },
+                {
+                    "label": "FANDUB",
+                    "title": "Fabric Tongues",
+                    "src": "https://www.youtube.com/watch?v=Cn1Ev7JVzd4"
+                }
+            ],
+            "desc": "<p>A lost soul in constant turmoil.</p><p>Dreams of the beach and the sand.</p><p>Loves games.</p><p>He's not quite as good as he used to be.</p>",
+            "layer": "primary"
+        },
+        "kourone": {
+            "name": "Kourone",
+            "icon": "/character/icon/kourone.png",
+            "world": "halfside",
+            "link": "character/Kourone.html",
+            "stats": {
+                "prns": "he/they"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "heartless",
+                    "biological"
+                ]
+            },
+            "desc": "<p>Looking for something...or someone?</p><p>They are focused only on their pursuit, and nothing else.</p><p>Loves games, but only the ones that he's good at.</p><p>Which is all of them, of course.</p>",
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/11697399.-"
+                }
+            ],
+            "layer": "secondary"
+        },
+        "corbeau": {
+            "name": "Dr. Corbeau",
+            "icon": "/character/icon/corbeau.png",
+            "world": "halfside",
+            "link": "character/Dr.%20Corbeau.html",
+            "desc": "<p>Her true form is entirely within her head.</p><p>She pilots a bipedal mechanical body and focuses on her science.</p><p>The ecosystem of the world has been drastically changed as a direct result of her experiments.</p>",
+            "stats": {
+                "prns": "she/her"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "artificialheart",
+                    "mechanical"
+                ]
+            },
+            "layer": "secondary",
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/10125443.dr-corbeau"
+                }
+            ]
+        },
+        "quincy": {
+            "name": "Quincy",
+            "icon": "/character/icon/quincy.png",
+            "world": "halfside",
+            "link": "character/Quincy.html",
+            "layer": "secondary",
+            "desc": "<p>They used to be someone, or perhaps something else.</p><p>Whatever they were, they're this thing now.</p><p>They try to make people laugh.</p>",
+            "stats": {
+                "prns": "they/them"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "heartless",
+                    "ethereal"
+                ]
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/4739302.quincy"
+                }
+            ]
+        },
+        "urmi": {
+            "name": "Urmi",
+            "icon": "/character/icon/urmi.png",
+            "world": "halfside",
+            "link": "character/Urmi.html",
+            "layer": "secondary",
+            "stats": {
+                "prns": "they/them"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "artificialheart",
+                    "ethereal"
+                ]
+            },
+            "desc": "<p>A being made entirely out of paper.</p><p>They have a job they're supposed to be doing, but they don't feel any purpose in doing it anymore.</p><p>Oh well.</p>",
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/3672693.urmi"
+                }
+            ]
+        },
+        "audri": {
+            "name": "Audri",
+            "icon": "/character/icon/audri.png",
+            "world": "halfside",
+            "link": "character/Audri.html",
+            "desc": "<p>A being made entirely out of paper.</p><p>They have a job they're supposed to be doing, but they don't feel like doing it.</p><p>Oh well.</p>",
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "artificialheart",
+                    "ethereal"
+                ]
+            },
+            "stats": {
+                "prns": "they/them"
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/3672638.audri"
+                }
+            ],
+            "layer": "secondary"
+        },
+        "guzzenmite": {
+            "name": "G\u00fczzenmite",
+            "icon": "/character/icon/guzzenmite.png",
+            "world": "routemaster",
+            "link": "character/G%C3%BCzzenmite.html",
+            "layer": "primary",
+            "stats": {
+                "prns": "ANYTHING YOU LIKE!"
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/11697910.guzzenmite"
+                }
+            ],
+            "desc": "<p>Born from the will of 'jokes' and 'pranks' all around the world, both cruel and kind.</p><p>Looked down on by many as a pest, but there is a sincere heart within, to those that wish to know it.</p><p>Their favorite pastime is playing with their own form. They do not know how not to smile.</p>",
+            "card": {
+                "illuscredit": "espimyte"
+            }
+        },
+        "ian": {
+            "name": "Ian",
+            "icon": "/character/icon/ian.png",
+            "world": "routemaster",
+            "link": "character/Ian.html",
+            "layer": "primary",
+            "stats": {
+                "prns": "he/him"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "bug",
+                    "roaming"
+                ]
+            },
+            "desc": "<p>A roamer with an apprentice.</p><p>Wants to go on a vacation.</p><p>Loves food and cooking.</p><p>Knowledgeable on the importance of jewelry in this world.</p><p>Has a stash of jewerly somewhere in the high corners of the world.</p>",
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/10418208.ian"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "Mask Festival",
+                    "src": "/comic/mask-festival.html"
+                }
+            ]
+        },
+        "carvel": {
+            "name": "Carvel",
+            "icon": "/character/icon/carvel.png",
+            "world": "routemaster",
+            "link": "character/Carvel.html",
+            "layer": "primary",
+            "desc": "<p>A roamer who is an apprentice.</p><p>He used to live underneath the sink until he was found by <a href=\"/character/Ian.html\">Ian</a>.</p><p>Wants to go on a vacation.</p><p>A long time ago, he used to try being someone that he wasn't.</p><p>It didn't work out.</p>",
+            "stats": {
+                "prns": "he/him"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "amphibian",
+                    "roaming"
+                ]
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/3664968.carvel"
+                },
+                {
+                    "label": "COMIC",
+                    "title": "Mask Festival",
+                    "src": "/comic/mask-festival.html"
+                }
+            ]
+        },
+        "hawk": {
+            "name": "Mrs. Hawk",
+            "icon": "/character/icon/hawk.png",
+            "world": "routemaster",
+            "link": "character/Mrs.%20Hawk.html",
+            "stats": {
+                "prns": "she/her"
+            },
+            "desc": "<p>Not much is known about her.</p><p>She is often seen at high altitudes.</p><p>She knows many languages and likes to sleep.</p><p>I saw her at a restaurant once!</p><p>She was wearing a cool red shirt and an awesome jacket with sunglasses.</p>",
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "bug",
+                    "settled"
+                ]
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/11728305.mrs-hawk"
+                }
+            ]
+        },
+        "sallis": {
+            "name": "Sallis",
+            "icon": "/character/icon/sallis.png",
+            "world": "routemaster",
+            "link": "character/Sallis.html",
+            "desc": "<p>Runs a shop inside of the medicine cabinet.</p><p>Lives with her family.</p><p>Her family means well, but they don't really understand her.</p>",
+            "stats": {
+                "prns": "she/her"
+            },
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "bug",
+                    "settled"
+                ]
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/3671420.sallis"
+                }
+            ]
+        },
+        "sinnosa": {
+            "name": "Sinnosa",
+            "icon": "/character/icon/sinnosa.png",
+            "world": "routemaster",
+            "link": "character/Sinnosa.html",
+            "stats": {
+                "prns": "she/her"
+            },
+            "desc": "<p>Often seen around the drainage cities.</p><p>It seems she has an important job to do, and she prefers not to be disturbed.</p>",
+            "card": {
+                "illuscredit": "espimyte",
+                "types": [
+                    "bug",
+                    "settled"
+                ]
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/3672111.sinnosa"
+                }
+            ]
+        },
+        "minus": {
+            "name": "Minus Sinus",
+            "icon": "/character/icon/minus.png",
+            "world": "sonas",
+            "link": "character/Minus%20Sinus.html",
+            "desc": "<p>My sona.</p><p>They may be referred to as \"Dr. Sinus\", or just \"Minus\".</p><p><b>DISCLAIMER</b>: I am not a real doctor. Only my sona is. I am a scientist but I don't have a PhD or anything. Though if you want to call me \"Dr. Espy\" anyway, I would be very pleased.",
+            "stats": {
+                "prns": "they/them",
+                "bday": "04/01"
+            },
+            "card": {
+                "illuscredit": "espimyte"
+            },
+            "layer": "primary",
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/9952300.minus"
+                }
+            ]
+        },
+        "espeonscientist": {
+            "name": "Dr. Espy",
+            "icon": "/character/icon/espeonscientist.png",
+            "world": "sonas",
+            "link": "character/Dr.%20Espy.html",
+            "layer": "primary",
+            "desc": "<p>My pok\u00e9sona!</p><p>Not actually a real doctor, but they call themselves a doctor anyways.</p><p>They claim to have \"a PhD in everything\", but that seems dubious.</p>",
+            "stats": {
+                "prns": "they/it/xe",
+                "bday": "04/01"
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/22976444.dr-espy"
+                }
+            ],
+            "card": {
+                "illuscredit": "espimyte"
+            }
+        },
+        "guup": {
+            "name": "Guup",
+            "icon": "/character/icon/guup.png",
+            "world": "facilityentra",
+            "link": "character/Guup.html",
+            "layer": "primary",
+            "stats": {
+                "prns": "any pronouns"
+            },
+            "card": {
+                "illuscredit": "Slitherbop"
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/28049737.guup"
+                }
+            ],
+            "desc": "<p>A demon of dreams and machines.</p><p>Lives in an RV.</p><p>Loves the smell of gasoline and durian stalls.</p><p class=\"quote\"><i>\"'Danger'. What is 'danger'? You say 'It's dangerous'. I don't understand the way you think. Why am I so hung up on the way you call things dangerous? I thought about it. I don't think I have a sense of danger at all. Or maybe I do, but I've gotten so attuned to ignoring it that I can't feel it anymore. Is that the same as not having a sense of it?\"</i></p>"
+        },
+        "demon": {
+            "name": "Nameless",
+            "icon": "/character/icon/demon.png",
+            "link": "character/Nameless.html",
+            "world": "facilityentra",
+            "desc": "<p>A demon constructed from scattered parts.</p><p>They used to have a name but not for too long, for it was only borrowed.</p><p>Their purpose was to be a vessel to have fun with friends.</p><p>Everything fell apart before that could happen.</p><p>Now what?</p>",
+            "card": {
+                "illuscredit": "espimyte"
+            }
+        },
+        "jules": {
+            "name": "Jules",
+            "icon": "/character/icon/jules.png",
+            "world": "facilityentra",
+            "desc": "<p>Another demon who was meant as a vessel for fun and games.</p><p>They find themselves lost now.</p><p>Is her home in Facility Entra?</p>",
+            "card": {
+                "illuscredit": "espimyte"
+            },
+            "link": "character/Jules.html"
+        },
+        "aud": {
+            "name": "Aud",
+            "icon": "/character/icon/aud.png",
+            "link": "character/Aud.html",
+            "desc": "<p>A being capable of detecting even the smallest sounds.</p><p>This is quite a burden to it.</p>",
+            "card": {
+                "illuscredit": "espimyte"
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/3673114.aud"
+                }
+            ]
+        },
+        "nell": {
+            "name": "Nell",
+            "icon": "/character/icon/nell.png",
+            "link": "character/Nell.html",
+            "desc": "<p>A little creature!</p><p>Sometimes they can grow to be very very tall.</p><p>They like to bash their heads against things.</p>",
+            "card": {
+                "illuscredit": "espimyte"
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/10126877.nell"
+                }
+            ]
+        },
+        "ballooncat": {
+            "name": "Balloon Cat",
+            "icon": "/character/icon/ballooncat.png",
+            "link": "character/Balloon%20Cat.html",
+            "desc": "<p>A cat that's always holding a balloon.</p><p>Or several.</p><p>It goes wherever the balloon goes, and the balloon goes wherever the wind goes, and the wind is lost.</p>",
+            "card": {
+                "illuscredit": "espimyte"
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/3672751.balloon-cat"
+                }
+            ]
+        },
+        "king": {
+            "name": "King",
+            "icon": "/character/icon/king.png",
+            "link": "character/King.html",
+            "desc": "<p>A king.</p><p>I don't know much about him.</p><p>Maybe I'll find out.</p>",
+            "card": {
+                "illuscredit": "espimyte"
+            },
+            "stats": {
+                "prns": "he/him"
+            },
+            "links": [
+                {
+                    "title": "Toyhouse",
+                    "src": "https://toyhou.se/12442225.king"
+                }
+            ]
+        }
+    },
+    "worlds": {
+        "worldcocoon": {
+            "name": "World Cocoon",
+            "desc": "A world of longing, metamorphosis, and gaming."
+        },
+        "halfside": {
+            "name": "Halfside",
+            "desc": "Descent, demise, and defiance."
+        },
+        "routemaster": {
+            "name": "Routemaster",
+            "desc": "Greetings! Where do you call home?"
+        },
+        "facilityentra": {
+            "name": "Facility Entra",
+            "desc": "I've been dreaming of demons."
+        },
+        "sonas": {
+            "name": "Sonas",
+            "desc": "What the hell are these things? Are they me? Or simply false effigies?"
+        },
+        "misc": {
+            "name": "Miscellaneous",
+            "desc": "Characters that do not fit into any other world/category."
+        }
+    }
+}
